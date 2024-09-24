@@ -2,8 +2,9 @@ package com.example.admin.Controller;
 
 import com.example.admin.DTO.OrderDTO;
 import com.example.admin.Entity.Order;
-import com.example.admin.Service.OrderService;
-import com.example.admin.Service.PaymentService;
+import com.example.admin.Entity.Product;
+import com.example.admin.Repository.OrderRepository;
+import com.example.admin.Service.*;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -25,24 +27,140 @@ public class OrderController {
     private OrderService orderService;
 
     @Autowired
+    private UserService userService;
+
+    @Autowired
+     private AddressService addressService;
+
+    @Autowired
+    private ProductService productService;
+
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
     private PaymentService paymentService;
+//    @PostMapping("/place")
+//    public ResponseEntity<?> placeOrder(@RequestBody OrderDTO orderDTO) {
+//        try {
+//            // Calculate the order amount from OrderDTO
+//            double amount = orderDTO.getAmount();
+//
+//            // Call the PaymentService to create a Razorpay order
+//            JSONObject razorpayOrder = paymentService.createOrder(amount);
+//
+//            // Create a new Order entity to save in the database
+//            Order order = new Order();
+//            order.setOrderStatus("PENDING");  // Set initial order status as 'PENDING'
+//            order.setAmount(amount);
+//            order.setQuantity(orderDTO.getQuantity());  // Assuming OrderDTO has a quantity field
+//            order.setOrderDate(LocalDate.now());
+//            order.setDeliveryDate(orderDTO.getDeliveryDate());  // Assuming OrderDTO has a delivery date
+//            order.setUser(userService.findUserById(orderDTO.getUserId()));  // Get user based on OrderDTO's userId
+//            order.setOrderAddress(addressService.findById(orderDTO.getAddressId()));  // Get address from OrderDTO
+//
+//            // Find the product by ID and handle Optional
+//            Product product = productService.findById(orderDTO.getProductId())
+//                    .orElseThrow(() -> new IllegalArgumentException("Product not found with ID: " + orderDTO.getProductId()));
+//            order.setProduct(product);  // Set product details
+//            order.setTotalPrice(amount * orderDTO.getQuantity());
+//
+//            // Save the order to the database
+//            orderRepository.save(order);
+//
+//            // Return the Razorpay order details as response
+//            return ResponseEntity.ok(razorpayOrder.toString());
+//        } catch (IllegalArgumentException e) {
+//            logger.error("Error while placing order: {}", e.getMessage());
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+//        } catch (Exception e) {
+//            logger.error("Error while placing order: {}", e.getMessage());
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error placing order.");
+//        }
+//    }
+
+//    @PostMapping("/place")
+//    public ResponseEntity<?> placeOrder(@RequestBody OrderDTO orderDTO) {
+//        try {
+//            // Calculate the order amount from OrderDTO
+//            double amount = orderDTO.getAmount();
+//
+//            // Call the PaymentService to create a Razorpay order
+//            JSONObject razorpayOrder = paymentService.createOrder(amount);
+//
+//            // Create a new Order entity to save in the database
+//            Order order = new Order();
+//            order.setOrderStatus("PENDING");  // Set initial order status as 'PENDING'
+//            order.setAmount(amount);
+//            order.setQuantity(orderDTO.getQuantity());  // Assuming OrderDTO has a quantity field
+//            order.setOrderDate(LocalDate.now());
+//            order.setDeliveryDate(orderDTO.getDeliveryDate());  // Assuming OrderDTO has a delivery date
+//            order.setUser(userService.findUserById(orderDTO.getUserId()));  // Get user based on OrderDTO's userId
+//            order.setOrderAddress(addressService.findById(orderDTO.getAddressId()));  // Get address from OrderDTO
+//
+//            // Find the product by ID and handle Optional
+//            Product product = productService.findById(orderDTO.getProductId())
+//                    .orElseThrow(() -> new IllegalArgumentException("Product not found with ID: " + orderDTO.getProductId()));
+//            order.setProduct(product);  // Set product details
+//            order.setTotalPrice(amount * orderDTO.getQuantity());
+//
+//            // Save the order to the database
+//            orderRepository.save(order);
+//
+//            // Return the Razorpay order details as response
+//            return ResponseEntity.ok(razorpayOrder.toString());
+//        } catch (IllegalArgumentException e) {
+//            logger.error("Error while placing order: {}", e.getMessage());
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+//        } catch (Exception e) {
+//            logger.error("Error while placing order: {}", e.getMessage());
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error placing order.");
+//        }
+//    }
 
     @PostMapping("/place")
     public ResponseEntity<?> placeOrder(@RequestBody OrderDTO orderDTO) {
         try {
-            // Calculate order amount, for example, from the OrderDTO
+            // Calculate the order amount from OrderDTO
             double amount = orderDTO.getAmount();
 
-            // Call the PaymentService to create a Razorpay order
-            JSONObject razorpayOrder = paymentService.createOrder(amount);
+            // Calculate total price
+            double totalPrice = amount * orderDTO.getQuantity();
 
-            // Return the Razorpay order details in the response
+            // Call the PaymentService to create a Razorpay order with total price
+            JSONObject razorpayOrder = paymentService.createOrder(totalPrice);
+
+            // Create a new Order entity to save in the database
+            Order order = new Order();
+            order.setOrderStatus("PENDING");  // Set initial order status as 'PENDING'
+            order.setAmount(amount);
+            order.setQuantity(orderDTO.getQuantity());  // Assuming OrderDTO has a quantity field
+            order.setOrderDate(LocalDate.now());
+            order.setDeliveryDate(orderDTO.getDeliveryDate());  // Assuming OrderDTO has a delivery date
+            order.setUser(userService.findUserById(orderDTO.getUserId()));  // Get user based on OrderDTO's userId
+            order.setOrderAddress(addressService.findById(orderDTO.getAddressId()));  // Get address from OrderDTO
+
+            // Find the product by ID and handle Optional
+            Product product = productService.findById(orderDTO.getProductId())
+                    .orElseThrow(() -> new IllegalArgumentException("Product not found with ID: " + orderDTO.getProductId()));
+            order.setProduct(product);  // Set product details
+            order.setTotalPrice(totalPrice);  // Set the total price for the order
+
+            // Save the order to the database
+            orderRepository.save(order);
+
+            // Return the Razorpay order details as response
             return ResponseEntity.ok(razorpayOrder.toString());
+        } catch (IllegalArgumentException e) {
+            logger.error("Error while placing order: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (Exception e) {
             logger.error("Error while placing order: {}", e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error placing order.");
         }
     }
+
+
     @PostMapping("/verifyPayment")
     public ResponseEntity<?> verifyPayment(@RequestBody Map<String, String> paymentDetails) {
         try {

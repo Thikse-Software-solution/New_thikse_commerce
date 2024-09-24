@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from './product.model';
 
@@ -7,7 +7,7 @@ import { Product } from './product.model';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://192.168.1.6:8080/api/products'; // Adjust base URL if necessary
+  private apiUrl = 'http://localhost:8080/api/products'; // Adjust base URL if necessary
 
   constructor(private http: HttpClient) {}
   addProduct(product: FormData): Observable<Product> {

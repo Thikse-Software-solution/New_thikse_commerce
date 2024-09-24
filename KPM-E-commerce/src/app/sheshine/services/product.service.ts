@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
 import { map } from 'rxjs/operators';
 export interface Product {
@@ -39,8 +39,8 @@ export class ProductService {
   public product$: Observable<Product | null> =
     this.productSubject.asObservable();
 
-  private productsUrl = 'http://192.168.1.6:8080/api/products/json';
-  private shineProductsUrl = 'http://192.168.1.6:8080/api/products/json';
+  private productsUrl = 'http://localhost:8080/api/products/json';
+  private shineProductsUrl = 'http://localhost:8080/api/products/json';
 
   constructor(private http: HttpClient) {
     this.loadProduct();

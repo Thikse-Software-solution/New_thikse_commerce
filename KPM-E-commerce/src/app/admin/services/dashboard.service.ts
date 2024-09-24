@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DashboardService {
-  private apiUrl = 'http://192.168.1.6:8080/api/dashboard/metrics'; // Adjust URL as needed
+  private apiUrl = 'http://localhost:8080/api/dashboard/metrics'; // Adjust URL as needed
 
   constructor(private http: HttpClient) {}
 

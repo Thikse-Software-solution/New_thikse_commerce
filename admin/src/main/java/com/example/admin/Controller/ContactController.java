@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/contact")
-@CrossOrigin(origins = "http://192.168.1.6:4200") // Ensure proper CORS configuration
+// Ensure proper CORS configuration
 public class ContactController {
 
     private final ContactService contactService;

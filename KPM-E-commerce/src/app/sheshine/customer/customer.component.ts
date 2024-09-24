@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-customer',
@@ -18,7 +18,7 @@ export class CustomerComponent implements OnInit {
 
   fetchTestimonials() {
     this.http
-      .get<any[]>('http://192.168.1.6:8080/api/admin/customers/get')
+      .get<any[]>('http://localhost:8080/api/admin/customers/get')
       .subscribe(
         (data) => {
           this.testimonials = data;
