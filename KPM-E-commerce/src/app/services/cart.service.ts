@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 
+import { catchError } from 'rxjs/operators';
 import { Product } from '../sheshine/services/product.service';
-import { map, catchError } from 'rxjs/operators';
 // Adjust import path if necessary
 // export interface CartItem {
 //   id: number;           // Unique identifier for the cart item
@@ -59,7 +59,7 @@ export class CartService {
   private cartItemCountSource = new BehaviorSubject<number>(0);
   cartItemCount$ = this.cartItemCountSource.asObservable();
 
-  private apiUrl = 'http://192.168.1.6:8080/api/cart'; // Base URL for cart API, replace with your actual backend URL
+  private apiUrl = 'http://localhost:8080/api/cart'; // Base URL for cart API, replace with your actual backend URL
 
   constructor(private http: HttpClient) {}
 

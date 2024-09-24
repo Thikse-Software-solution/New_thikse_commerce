@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class OutOfStockProductService {
   private baseUrl =
-    'http://192.168.1.6:8080/api/analytics/out-of-stock-products';
+    'http://localhost:8080/api/analytics/out-of-stock-products';
 
   constructor(private http: HttpClient) {}
 

@@ -91,4 +91,10 @@ public class AddressService {
 
         return user.getSelectedAddress();
     }
+
+
+    public Address findById(Long addressId) {
+        return addressRepository.findById(addressId)
+                .orElseThrow(() -> new RuntimeException("Address not found"));
+    }
 }

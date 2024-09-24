@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { User } from './user-profile.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl = 'http://192.168.1.6:8080/api/users';
+  private apiUrl = 'http://localhost:8080/api/users';
   private user: User | null = null;
 
   constructor(private http: HttpClient) {}

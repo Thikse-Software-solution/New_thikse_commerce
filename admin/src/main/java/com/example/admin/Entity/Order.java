@@ -18,7 +18,7 @@ public class Order {
     @Column(name = "order_status", nullable = false)
     private String orderStatus;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;
@@ -40,10 +40,14 @@ public class Order {
     @Column(name = "order_date", nullable = false)
     private LocalDate orderDate;
 
-    @Column(name = "delivery_date", nullable = false)
+    @Column(name = "delivery_date")
     private LocalDate deliveryDate;
-private double totalprice;
+
+    @Column(name = "total_price", nullable = false)  // New field to store total price
+    private double totalPrice;
+
     // Getters and Setters
+
     public Long getOrderId() {
         return orderId;
     }
@@ -116,12 +120,16 @@ private double totalprice;
         this.deliveryDate = deliveryDate;
     }
 
-
-    public void setTotalprice(double totalprice) {
-        this.totalprice = totalprice;
+    public double getTotalPrice() {
+        return this.totalPrice;
     }
 
-    public double getTotalPrice() {
-        return totalprice;
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    // Method to calculate total price
+    public void calculateTotalPrice() {
+        this.totalPrice = this.amount * this.quantity;
     }
 }

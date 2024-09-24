@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from '../services/order';
 
@@ -7,7 +7,7 @@ import { Order } from '../services/order';
   providedIn: 'root',
 })
 export class OrderService {
-  private apiUrl = 'http://192.168.1.6:8080/api/orders';
+  private apiUrl = 'http://localhost:8080/api/orders';
 
   constructor(private http: HttpClient) {}
 

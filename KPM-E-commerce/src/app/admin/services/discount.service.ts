@@ -1,6 +1,6 @@
 // discount.service.ts
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 interface Discount {
@@ -14,7 +14,7 @@ interface Discount {
   providedIn: 'root',
 })
 export class DiscountService {
-  private apiUrl = 'http://192.168.1.6:8080/api/discounts'; // Your backend URL
+  private apiUrl = 'http://localhost:8080/api/discounts'; // Your backend URL
 
   constructor(private http: HttpClient) {}
 

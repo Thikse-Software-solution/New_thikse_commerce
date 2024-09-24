@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 export interface Product {
@@ -27,7 +27,7 @@ export interface Product {
   providedIn: 'root',
 })
 export class ShineProductService {
-  private baseUrl: string = 'http://192.168.1.6:8080/api/products/json'; // Path to your JSON file
+  private baseUrl: string = 'http://localhost:8080/api/products/json'; // Path to your JSON file
 
   constructor(private http: HttpClient) {}
 

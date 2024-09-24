@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Review } from './review.model';
 
@@ -8,7 +8,7 @@ import { Review } from './review.model';
 })
 export class ReviewService {
 
-  private apiUrl = 'http://192.168.1.6:8080/api/reviews'; // Your API base URL
+  private apiUrl = 'http://localhost:8080/api/reviews'; // Your API base URL
 
   constructor(private http: HttpClient) {}
 

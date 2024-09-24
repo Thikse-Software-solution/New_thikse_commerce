@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-verify-account',
@@ -29,7 +28,7 @@ export class VerifyAccountComponent implements OnInit {
   }
 
   verifyAccount(token: string): void {
-    this.http.get(`http://192.168.1.6:8080/api/users/verify?token=${token}`)
+    this.http.get(`http://localhost:8080/api/users/verify?token=${token}`)
       .subscribe({
         next: (response: any) => {
           this.verificationMessage = 'Account successfully verified. Redirecting to login...';

@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OrderService {
-  private baseUrl = 'http://192.168.1.6:8080/api/orders'; // Update with your API base URL
+  private baseUrl = 'http://localhost:8080/api/orders'; // Update with your API base URL
 
   constructor(private http: HttpClient) {}
 
