@@ -1,0 +1,77 @@
+<div class="form-container sign-in" [ngClass]="{'active': isLogin}">
+    <!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <h4>Login</h4>
+        <div class="social-icons">
+            <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+        <span>or use your email and password</span>
+
+       
+        <div class="form-group">
+            <input type="email" placeholder="Email" formControlName="email" class="form-control"
+                [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)}" />
+            <div *ngIf="loginForm.get('email')?.invalid && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)"
+                class="invalid-feedback">
+                <div *ngIf="loginForm.get('email')?.errors?.['required']">Email is required.</div>
+                <div *ngIf="loginForm.get('email')?.errors?.['email']">Enter a valid email.</div>
+            </div>
+        </div>
+
+        
+        <div class="form-group password-field">
+            <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password"
+                class="form-control"
+                [ngClass]="{'is-invalid': loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)}" />
+            <i (click)="togglePasswordVisibility()" class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+            <div *ngIf="loginForm.get('password')?.invalid && (loginForm.get('password')?.touched || loginForm.get('password')?.dirty)"
+                class="invalid-feedback">
+                <div *ngIf="loginForm.get('password')?.errors?.['required']">Password is required.</div>
+                <div *ngIf="loginForm.get('password')?.errors?.['minlength']">Password must be at least 6 characters
+                    long.</div>
+            </div>
+        </div> -->
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h4>Login</h4>
+    <span>or use your email and password</span>
+<div>
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email">
+    <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        Valid email is required.
+    </div>
+</div>
+
+<div>
+    <label for="password">Password</label>
+    <input id="password" type="password" formControlName="password">
+    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        Password is required.
+    </div>
+</div>
+<div *ngIf="errorMessage">
+    <p>{{ errorMessage }}</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <a routerLink="/forgotpassword">Forget Your Password?</a>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary" >Login</button>
+
+        <!-- Signup Link for Mobile -->
+        <a class="signupformobile" routerLink="/signup">Signup &#8594;</a>
+    </form>
+</div>

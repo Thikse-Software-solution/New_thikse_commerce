@@ -1,0 +1,10 @@
+<div class="container">
+    <div *ngIf="verificationMessage === ''">
+        <p>Verifying your account...</p>
+        <!-- You can add a loading spinner here -->
+    </div>
+
+    <div *ngIf="verificationMessage !== ''">
+        <p>{{ verificationMessage }}</p>
+    </div>
+</div>

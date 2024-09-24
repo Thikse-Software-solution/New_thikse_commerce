@@ -1,0 +1,77 @@
+<div class="container">
+    <h2 class="text-center mt-4">Add New Address</h2>
+    <form (ngSubmit)="addAddress()" class="needs-validation" novalidate>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" [(ngModel)]="newAddress.name" name="name"
+                    placeholder="Enter your name" required>
+                <div class="invalid-feedback">
+                    Please enter a name.
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="type">Type</label>
+                <select class="form-control" id="type" [(ngModel)]="newAddress.type" name="type" required>
+                    <option value="Home">Home</option>
+                    <option value="Work">Work</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please select a type.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phone" [(ngModel)]="newAddress.phone" name="phone"
+                    placeholder="Enter your phone number" required>
+                <div class="invalid-feedback">
+                    Please enter a phone number.
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="addressLine1">Address Line 1</label>
+                <input type="text" class="form-control" id="addressLine1" [(ngModel)]="newAddress.addressLine1"
+                    name="addressLine1" placeholder="Enter address line 1" required>
+                <div class="invalid-feedback">
+                    Please enter address line 1.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="addressLine2">Address Line 2</label>
+                <input type="text" class="form-control" id="addressLine2" [(ngModel)]="newAddress.addressLine2"
+                    name="addressLine2" placeholder="Enter address line 2">
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city" [(ngModel)]="newAddress.city" name="city"
+                    placeholder="Enter your city" required>
+                <div class="invalid-feedback">
+                    Please enter a city.
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="state">State</label>
+                <input type="text" class="form-control" id="state" [(ngModel)]="newAddress.state" name="state"
+                    placeholder="Enter your state" required>
+                <div class="invalid-feedback">
+                    Please enter a state.
+                </div>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="zip">ZIP</label>
+                <input type="text" class="form-control" id="zip" [(ngModel)]="newAddress.zip" name="zip"
+                    placeholder="Enter your ZIP code" required>
+                <div class="invalid-feedback">
+                    Please enter a ZIP code.
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary btn-block mt-4" type="submit">Save</button>
+    </form>
+</div>

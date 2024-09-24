@@ -1,0 +1,10 @@
+.container {
+    max-width: 600px;
+    margin: auto;
+}
+
+@media (max-width: 576px) {
+    .btn-block {
+        width: 100%;
+    }
+}

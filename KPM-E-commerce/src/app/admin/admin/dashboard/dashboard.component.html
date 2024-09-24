@@ -1,0 +1,35 @@
+<div class="d-flex">
+  <div class="maindiv d-flex h-100 bg-light">
+    <!-- Sidebar -->
+    <aside class="bg-white shadow p-4" style="width: 16rem;">
+      <ul class="list-unstyled">
+        <li><a routerLink="overview" class="text-dark d-block py-2 px-3 rounded hover:bg-light">Overview</a></li>
+        <li><a routerLink="product" class="text-dark d-block py-2 px-3 rounded hover:bg-light">Product Management</a>
+        </li>
+       
+        <li><a routerLink="order" class="text-dark d-block py-2 px-3 rounded hover:bg-light">Order Management</a></li>
+        <li><a routerLink="customer" class="text-dark d-block py-2 px-3 rounded hover:bg-light">Customer Management</a>
+        </li>
+        <li><a routerLink="report" class="text-dark d-block py-2 px-3 rounded hover:bg-light">Offer mails</a>
+        </li>
+        <!-- <li><a routerLink="behavior" class="text-dark d-block py-2 px-3 rounded hover:bg-light">Behavior</a>
+        </li>
+        <li><a routerLink="outofstock" class="text-dark d-block py-2 px-3 rounded hover:bg-light">outofstock</a>
+        </li>
+        <li><a routerLink="pendingorder" class="text-dark d-block py-2 px-3 rounded hover:bg-light">pendingorder</a>
+        </li>
+        <li><a routerLink="productlist" class="text-dark d-block py-2 px-3 rounded hover:bg-light">productlist</a>
+        </li>
+        <li><a routerLink="shippingdetail" class="text-dark d-block py-2 px-3 rounded hover:bg-light">shippingdetail</a>
+        </li>
+        <li><a routerLink="summarycard" class="text-dark d-block py-2 px-3 rounded hover:bg-light">summarycard</a>
+        </li> -->
+        <li><a routerLink="logout"(click)="logout()" class="text-dark d-block py-2 px-3 rounded hover:bg-light">logout</a></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="flex-grow-1">
+    <router-outlet></router-outlet>
+  </div>
+</div>

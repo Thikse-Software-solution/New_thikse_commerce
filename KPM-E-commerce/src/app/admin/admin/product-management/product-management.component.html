@@ -1,0 +1,231 @@
+<div class="container">
+  <h1>Product Form</h1>
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()" method="post" enctype="multipart/form-data">
+    <!-- Title -->
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" formControlName="title" class="form-control" />
+    </div>
+
+    <!-- Shine -->
+    <div class="form-group">
+      <label for="shine">Shine</label>
+      <input type="checkbox" id="shine" formControlName="shine" (change)="onCheckboxChange('shine')" />
+    </div>
+    
+    <!-- SheShine -->
+    <div class="form-group">
+      <label for="sheShine">SheShine</label>
+      <input type="checkbox" id="sheShine" formControlName="sheShine" (change)="onCheckboxChange('sheShine')" />
+    </div>
+
+
+    <!-- Name -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" formControlName="name" class="form-control" />
+    </div>
+
+  <!-- Category -->
+  <div class="form-group" *ngIf="showCategory">
+    <label for="category">Category</label>
+    <select id="category" formControlName="category" class="form-control" (change)="onCategoryChange($event)">
+      <option *ngFor="let option of categoryOptions" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+  
+  <!-- SubCategory -->
+  <div class="form-group" *ngIf="showSubCategory">
+    <label for="subCategory">SubCategory</label>
+    <select id="subCategory" formControlName="subCategory" class="form-control">
+      <option *ngFor="let subOption of subCategoryOptions" [value]="subOption">{{ subOption }}</option>
+    </select>
+      
+  </div>
+
+  <!-- Main Image -->
+  <div class="mb-3">
+    <label for="mainImage" class="form-label">Main Image</label>
+    <input type="file" id="mainImage" class="form-control" name="mainImage"
+    (change)="onFileSelected($event, 'mainImage')" />
+  </div>
+  
+  <!-- Thumbnail Image -->
+  <div class="mb-3">
+    <label for="thumbnail" class="form-label">Thumbnail</label>
+    <input type="file" id="thumbnail" class="form-control" name="thumbnail"
+      (change)="onFileSelected($event, 'thumbnail')" />
+  </div>
+  
+  <!-- 3D Images -->
+  <div class="mb-3">
+    <label for="threeDImages" class="form-label">3D Images</label>
+    <input type="file" id="threeDImages" class="form-control" name="threeDImages"
+      (change)="onFileSelected($event, 'threeDImages')" multiple />
+  </div>
+  
+  <!-- Additional Images -->
+  <div class="mb-3">
+    <label for="images" class="form-label">Additional Images</label>
+    <input type="file" id="images" class="form-control" name="images" (change)="onFileSelected($event, 'images')"
+      multiple />
+  </div>
+    <!-- Benefits -->
+    <div class="form-group">
+      <label for="benefit">Benefits</label>
+      <input type="text" id="benefit" formControlName="benefit" class="form-control" />
+    </div>
+
+    <!-- Suitable For -->
+    <div class="form-group">
+      <label for="suitable">Suitable For</label>
+      <input type="text" id="suitable" formControlName="suitable" class="form-control" />
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" formControlName="description" class="form-control"></textarea>
+    </div>
+
+    <!-- Key Benefits -->
+    <div class="form-group">
+      <label for="keyBenefit">Key Benefits</label>
+      <input type="text" id="keyBenefit" formControlName="keyBenefit" class="form-control" />
+    </div>
+
+    <!-- How To Use -->
+    <div class="form-group">
+      <label for="howToUse">How To Use</label>
+      <input type="text" id="howToUse" formControlName="howToUse" class="form-control" />
+    </div>
+
+    <!-- Ingredients -->
+    <div class="form-group">
+      <label for="ingredients">Ingredients</label>
+      <input type="text" id="ingredients" formControlName="ingredients" class="form-control" />
+    </div>
+
+    <!-- Product Size -->
+    <div class="form-group">
+      <label for="size">Product Size</label>
+      <input type="text" id="size" formControlName="size" class="form-control" />
+    </div>
+
+    <!-- MRP -->
+    <div class="form-group">
+      <label for="mrp">MRP</label>
+      <input type="number" id="mrp" formControlName="mrp" class="form-control" />
+    </div>
+
+    <!-- Price -->
+    <div class="form-group">
+      <label for="price">Price</label>
+      <input type="number" id="price" formControlName="price" class="form-control" />
+    </div>
+
+    <!-- Stock Quantity -->
+    <div class="form-group">
+      <label for="stockQuantity">Stock Quantity</label>
+      <input type="number" id="stockQuantity" formControlName="stockQuantity" class="form-control" />
+    </div>
+
+    <!-- Discount -->
+    <div class="form-group">
+      <label for="discount">Discount</label>
+      <input type="number" id="discount" formControlName="discount" class="form-control" />
+    </div>
+
+    <!-- Feature -->
+    <div class="form-group">
+      <label for="feature">Feature</label>
+      <input type="checkbox" id="feature" formControlName="feature" />
+    </div>
+
+    <!-- Trending -->
+    <div class="form-group">
+      <label for="trend">Trending</label>
+      <input type="checkbox" id="trend" formControlName="trend" />
+    </div>
+
+    <!-- Special -->
+    <div class="form-group">
+      <label for="special">Special</label>
+      <input type="checkbox" id="special" formControlName="special" />
+    </div>
+
+    <!-- Special Line -->
+    <div class="form-group">
+      <label for="specialLine">Special Line</label>
+      <input type="text" id="specialLine" formControlName="specialLine" class="form-control" />
+    </div>
+
+    <!-- Color -->
+    <div class="form-group">
+      <label for="color">Color</label>
+      <input type="text" id="color" formControlName="color" class="form-control" />
+    </div>
+      <!-- Card Details -->
+      <div formArrayName="cards">
+        <div *ngFor="let card of cards.controls; let i = index" [formGroupName]="i" class="form-group">
+          <label for="cardText-{{ i }}">Card Text</label>
+          <input type="text" id="cardText-{{ i }}" formControlName="text" class="form-control" />
+      
+          <label for="cardTitle-{{ i }}">Card Title</label>
+          <input type="text" id="cardTitle-{{ i }}" formControlName="title" class="form-control" />
+      
+          <label for="cardImage-{{ i }}">Card Image</label>
+          <input type="file" id="cardImage-{{ i }}" (change)="onFileSelected($event, 'cards', i)" class="form-control" />
+        </div>
+      </div>
+
+    <!-- Submit Button -->
+    <div class="form-group">
+      <button   type="submit" [disabled]="productForm.invalid" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
+
+
+<div class="admin-products-container">
+  <!-- Table to display product details -->
+  <table class="admin-products-table">
+    <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock Quantity</th>
+        <th>MRP</th>
+        <th>Discount</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Loop through each product and display its details -->
+      <tr *ngFor="let product of products">
+        <td>
+          <img [src]="product.thumbnail" alt="{{ product.name }}" class="product-table-image">
+        </td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.price | currency: 'INR':'symbol':'1.2-2' }}</td>
+        <td>{{ product.stockQuantity }}</td>
+        <td>{{ product.mrp | currency: 'INR':'symbol':'1.2-2' }}</td>
+        <td>{{ product.discount }}%</td>
+        <td>
+          <button class="edit-button" (click)="editProduct(product)">Edit</button>
+        <button class="delete-button" (click)="deleteProduct(product.id)" *ngIf="product.id !== undefined">
+          Delete
+        </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Fallback template when no products are available -->
+  <div class="no-products-message" *ngIf="products.length === 0">
+    <p>No products available to display.</p>
+  </div>
+</div>

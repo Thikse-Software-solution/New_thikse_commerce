@@ -1,0 +1,39 @@
+.overview-container {
+  padding: 20px;
+}
+
+.statistics-row {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.product-sections {
+  margin-top: 20px;
+}
+
+.summary-card {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.product-list {
+  margin-top: 20px;
+}
+
+.product-list h3 {
+  margin-bottom: 10px;
+}
+
+.product-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.product-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}

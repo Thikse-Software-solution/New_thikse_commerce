@@ -1,0 +1,296 @@
+.product-detail {
+  padding: 20px;
+}
+
+.main_image {
+  width: 100%;
+  position: fixed;
+}
+
+
+.option {
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 75px;
+    height: 75px;
+    padding: 10px;
+    cursor: pointer;
+  }
+}
+
+.img-thumbnail {
+  max-width: 100px;
+  /* Adjust size as needed */
+  margin: 0 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.product-details {
+  height: calc(100vh - 40px);
+  overflow-y: scroll;
+  scrollbar-width: none;
+  /* For Firefox */
+  -ms-overflow-style: none;
+  /* For Internet Explorer and Edge */
+}
+
+.product-details::-webkit-scrollbar {
+  display: none;
+  /* For Chrome, Safari, and Opera */
+}
+
+.details-content {
+  padding: 10px;
+}
+
+.color-circle {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.product-rating {
+  margin-top: 1em;
+  color: #f3c012;
+  margin-top: 0;
+  font-size: 12px;
+
+  .txt-rate {
+    color: #8a8a8a;
+  }
+}
+.product-rating {
+  font-size: 9px;
+  line-height: 1.5;
+
+  span {
+    font-size: 12px;
+    display: flex;
+    gap: 3px;
+  }
+
+  .txt-rate {
+    font-size: 12px;
+  }
+}
+.quantity-btn {
+  width: 25px;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #C1908B;
+  color: #C1908B;
+  cursor: pointer;
+}
+
+button {
+  margin-top: 20px;
+}
+
+.review-section {
+  margin-top: 20px;
+}
+
+.reviews-section {
+  margin-top: 20px;
+}
+
+.reviews-container {
+  height: 200px;
+  /* Set a fixed height */
+  overflow-y: scroll;
+  scrollbar-width: none;
+  /* For Firefox */
+  -ms-overflow-style: none;
+  /* For Internet Explorer and Edge */
+}
+
+.reviews-container::-webkit-scrollbar {
+  display: none;
+  /* For Chrome, Safari, and Opera */
+}
+
+.review {
+  background: #f8f8f8;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.btn-cart {
+  background: rgb(244, 245, 247);
+  background: linear-gradient(111deg, rgb(244, 245, 247) 0%, rgb(217, 220, 228) 57%);
+  border: unset;
+
+  &:hover {
+    background: #99015B;
+    color: #fff;
+  }
+}
+
+@media (max-width: 768px) {
+  .main_image {
+    margin-bottom: 20px;
+  }
+
+  .product-details {
+    height: auto;
+    overflow-y: visible;
+  }
+}
+
+
+/* collapsible.component.css */
+.collapsible {
+  background-color: white;
+  color: rgb(15, 7, 7);
+  cursor: pointer;
+  padding: 10px 0;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  border-bottom: 1px solid #e2dfdf;
+}
+
+.active,
+.collapsible:hover {
+  background-color: #ffffff;
+}
+
+.content {
+  padding: 0;
+  display: none;
+  overflow: hidden;
+  background-color: white;
+
+  .card-text {
+    font-size: 12px !important;
+  }
+}
+
+/* collapsible.component.css */
+
+
+.collapsible:after {
+  content: '+';
+  /* Unicode character for "plus" sign (+) */
+  font-size: 25px;
+  color: black;
+  /* Change color to black */
+  float: right;
+  margin-left: 5px;
+}
+
+
+
+.active:after {
+  content: "-";
+  /* Unicode character for "minus" sign (-) */
+}
+
+
+
+.right-0 {
+  right: 0;
+}
+
+.product-detail {
+  .product-details {
+    .details-content {
+      padding-top: 0;
+
+      .card-title {
+        margin-bottom: 0;
+        font-size: 28px;
+        font-family: lora;
+        font-weight: 500;
+        text-transform: capitalize;
+      }
+
+      .card-text {
+        font-family: lora;
+        color: #8a8a8a;
+        font-size: 15px;
+
+        span {
+          font-weight: 500;
+        }
+      }
+
+      .content {
+        .card-text {
+          border-bottom: 1px solid #e2dfdf;
+        }
+      }
+
+      .card-text-special {
+        font-size: 12px;
+        margin-bottom: 0;
+        font-family: lora;
+      }
+    }
+  }
+
+  .collapsible {
+    margin-top: 0;
+    font-family: Lora, serif;
+  }
+}
+
+.product-mrpPrize {
+  .card-text {
+    margin: 5px 0;
+
+  }
+
+  .prize {
+    font-weight: 700 !important;
+    // margin-left: 5px;
+    font-size: 20px;
+    color: #202020;
+
+  }
+
+  .prize-detail {
+    .spec-prize {
+      color: #0caf12;
+      font-weight: 700;
+      font-family: lora;
+      font-size: 14px;
+    }
+
+    del {
+      margin-left: 5px;
+    }
+  }
+
+  .card-text-off {
+    margin: 0;
+
+    small {
+      color: #0caf12 !important;
+      font-weight: 700;
+    }
+  }
+}
+
+.product-buy-add {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0 0 0;
+
+  button {
+    margin-top: 10px;
+  }
+}

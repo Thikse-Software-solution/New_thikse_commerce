@@ -1,0 +1,96 @@
+<div>
+    <!-- <h2>Reviews</h2>
+    <div *ngFor="let review of reviews">
+        <h5>{{ review.user?.name }} - Rating: {{ review.rating }}</h5>
+        <p>{{ review.comment }}</p>
+    </div> -->
+
+
+
+<!-- Review Container -->
+
+<div class="review-mainBlock container-fluid">
+    <!-- Review Section -->
+    <div class="review-section">
+        <div class="review-headerBlock text-center">
+            <h3 class="review-header">Leave a Review for This Product</h3>
+            <p class="review-desc">
+                We’d love your feedback! Share your experience with our product to help
+                others make informed decisions. Your insights are valuable and help us
+                improve our products. Your feedback is valuable and helps us enhance our
+                offerings. 
+            </p>
+        </div>
+        <div class="review-areaBlock">
+            <div class="review-overAll">
+                <div class="review-areaHead">
+                    <p>Tell Us Your Thoughts</p>
+                </div>
+        <div class="star-rating">
+            <span *ngFor="let star of getStarArray(5); let i = index" (click)="setRating(i + 1)" class="star"
+                [class.filled]="i < newReview.rating">
+                ★
+            </span>
+        </div>
+            <textarea [(ngModel)]="newReview.comment" placeholder="Comment" required></textarea>
+           
+                <div class="d-flex justify-content-end">
+                    <button class="btn-sub mt-2" (click)="submitReview()">
+                        Submit Review
+                    </button>
+                </div>
+            </div>
+            <div class="over-allreview-update">
+                <div class="reviews-section">
+                    <div class="review-allReviewHead">
+                        <p>Hear from Our Happy Buyers</p>
+                    </div>
+                    <div class="overall-reviewBlock" *ngFor="let review of reviews">
+                        <div class="review-command">
+                            <div class="command-block">
+                                <div class="command">
+                                    <div class="command-link d-flex">
+                                        <div class="profile-img">
+                                            <img [src]="'data:image/png;base64,'+review.userAvatar" alt="">
+                                        </div>
+                                        <div class="comment-inform">
+                                            <div class="commander-details">
+                                                <p class="commander-name">{{review.userName}}</p>
+                                                <!-- <p class="commander-mail">{{}}</p> -->
+                                        <p class="commander-mail">
+                                            <span *ngFor="let star of getStarArray(review.rating)">
+                                                <i class="fa" [ngClass]="star === 1 ? 'fa-star filled-star' : 'fa-star empty-star'"></i>
+                                            </span>
+                                        </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div  class="review">
+                                        <p>{{ review.comment }}</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="reviews-container">
+            <div *ngFor="let review of reviews | slice : 0 : 10" class="review">
+              <p>{{ review }}</p>
+            </div>
+          </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- <h3>Average Rating: {{ averageRating }}</h3>
+
+    <h3>Add a Review</h3>
+    <input type="text" [(ngModel)]="newReview.user.name" placeholder="Your Name" required />
+    <input type="number" [(ngModel)]="newReview.rating" placeholder="Rating (1-5)" min="1" max="5" required />
+    <textarea [(ngModel)]="newReview.comment" placeholder="Comment" required></textarea>
+    <button (click)="submitReview()">Submit Review</button> -->
+</div>

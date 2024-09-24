@@ -1,0 +1,111 @@
+<section>
+  <div class="product-detail" *ngIf="product">
+    <!-- Ensure product properties are correctly bound -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="main_image position-relative">
+            <img [src]="'data:image/png;base64,'+product.thumbnail" alt="" class="img-fluid slide" />
+            <i class="fa-heart position-absolute top-0 right-0 m-3" [ngClass]="{ fas: isFavorite, far: !isFavorite }"
+              [class.text-danger]="isFavorite" (click)="toggleFavorite(product)">
+            </i>
+          </div>
+          <div class="option d-flex justify-content-center mt-3">
+            <img *ngFor="let image of product.images" [src]="'data:image/png;base64,'+image" alt="" class="img-thumbnail"
+              (click)="changeImage(image)" />
+          </div>
+        </div>
+        <div class="col-md-6 product-details">
+          <div class="details-content">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <h5 class="card-title"> {{ product.name }}</h5>
+              </div>
+              <div class="product-rating d-flex flex-column">
+                <span>
+                  <i *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" [class]="getStarClass(i, product.averageRating)"></i>
+                </span>
+                <span class="txt-rate">(Rating: {{ product.averageRating || 'N/A' }} / 5)</span>
+              </div>
+
+            </div>
+            <div>
+              <p class="card-text">
+                <span>Suitable for : </span>{{ product.suitable }}
+              </p>
+            </div>
+            <div>
+              <p class="card-text-special">
+                {{ product.special }}
+              </p>
+            </div>
+            <div class="product-mrpPrize">
+              <div class="prize-detail">
+                <p class="spec-prize mb-0">Special Prize</p>
+                <p class="card-text">
+                  <small class="text-muted">
+                    <span class="prize">{{ product.price | currency : "INR" }}</span>
+                    <del>{{ product.mrp | currency : "INR" }}</del>
+                  </small>
+                </p>
+              </div>
+              <p class="card-text-off">
+                <small class="text-muted">{{ product.discount }}% Off</small>
+              </p>
+            </div>
+            <div class="num-item">
+              <div class="add d-flex align-items-center">
+                <span class="quantity-btn" (click)="decreaseQuantity()">-</span>
+                <label class="mx-2">{{ product.quantity }}</label>
+                <span class="quantity-btn" (click)="increaseQuantity()">+</span>
+              </div>
+              <div class="d-flex">
+                <div class="product-buy-add">
+                  <button routerLink="/cart" class="btn btn-cart mt-0" (click)="addToCart(product)">
+                    Add to Cart
+                  </button>
+                  <button class="btn btn-success mt-0" (click)="buyNow(product.id)">
+                    Buy Now
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- Collapsible sections -->
+            <button type="button" [class]="getClass(1)" class="collapsible" (click)="toggleContent(1)">
+              Description
+            </button>
+            <div class="content" [style.display]="isActive(1) ? 'block' : 'none'">
+              <p class="card-text">{{ product.description }}</p>
+            </div>
+            <button type="button" [class]="getClass(2)" class="collapsible" (click)="toggleContent(2)">
+              Key Benefits
+            </button>
+            <div class="content" [style.display]="isActive(2) ? 'block' : 'none'">
+              <p class="card-text">{{ product.keybenefits }}</p>
+            </div>
+           
+<!--           
+             Reviews section -->
+            <!-- <div class="review-section">
+              <h6>Write a review</h6>
+              <textarea [(ngModel)]="reviewText" class="form-control" rows="3"
+                placeholder="Write your review here..."></textarea>
+              <button class="btn btn-primary mt-2" (click)="submitReview()">
+                Submit Review
+              </button>
+            </div>
+            <div class="reviews-section">
+              <h6>Reviews:</h6>
+              <div class="reviews-container">
+                <div *ngFor="let review of reviews | slice : 0 : 10" class="review">
+                  <p>{{ review }}</p>
+                </div>
+              </div>
+            </div> --> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-review></app-review>

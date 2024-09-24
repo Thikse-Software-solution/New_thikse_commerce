@@ -1,0 +1,31 @@
+<div *ngIf="orders.length > 0">
+  <h2>Manage Orders</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ProductName</th>
+        <th>Quantity</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>{{ order.id }}</td>
+        <td>{{ order.productName }}</td>
+        <td>{{ order.quantity }}</td>
+        <td>
+          <select (change)="onStatusChange($event, order.id)" [value]="order.status">
+            <option value="pending">Pending</option>
+            <option value="shipped">Shipped</option>
+            <option value="delivered">Delivered</option>
+          </select>
+        </td>
+        <td>
+          <!-- Add action buttons here if needed -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

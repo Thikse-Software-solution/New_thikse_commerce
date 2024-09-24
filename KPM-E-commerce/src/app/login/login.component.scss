@@ -1,0 +1,189 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  transition: all 0.6s ease-in-out;
+
+  &.sign-in {
+    left: 0;
+    width: 50%;
+    z-index: 2;
+
+    form {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 0 20px;
+      height: 100%;
+
+      h4 {
+        margin-bottom: 20px;
+      }
+
+      .social-icons {
+        margin: 20px 0;
+
+        a {
+          border: 1px solid #ccc;
+          border-radius: 20%;
+          display: inline-flex;
+          justify-content: center;
+          align-items: center;
+          margin: 0 3px;
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      span {
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+
+      input {
+        background-color: #eee;
+        border: none;
+        margin: 8px 0;
+        padding: 10px 15px;
+        font-size: 13px;
+        border-radius: 8px;
+        width: 100%;
+        outline: none;
+      }
+
+      button {
+        background-color: #512da8;
+        color: #fff;
+        font-size: 12px;
+        padding: 10px 45px;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        margin-top: 10px;
+        cursor: pointer;
+      }
+
+      a {
+        color: #333;
+        font-size: 13px;
+        text-decoration: none;
+        margin: 15px 0 10px;
+      }
+    }
+  }
+}
+
+// Media Queries for Tablet and Laptop
+@media (min-width: 768px) {
+  .container {
+    width: 768px;
+    min-height: 480px;
+  }
+
+  .signupformobile {
+    display: none;
+  }
+
+  .loginformobile {
+    display: none;
+  }
+
+  .form-container {
+    transition: all 0.6s ease-in-out;
+  }
+}
+
+// Media Queries for Desktop
+@media (min-width: 992px) {
+  .container {
+    width: 1024px;
+    min-height: 600px;
+  }
+
+  .signupformobile {
+    display: none;
+  }
+
+  .loginformobile {
+    display: none;
+  }
+     .form-container {
+       transition: all 0.6s ease-in-out; // Re-enable animations
+     }
+}
+
+// Media Query for Mobile
+@media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+    transition: all 0.6s ease-in-out; // Re-enable animations
+
+    .toggle-container {
+      display: none;
+    }
+  }
+
+  .form-container {
+    position: relative;
+    width: 100% !important;
+    height: auto;
+    transition: none;
+    align-items: center;
+    justify-content: center;
+
+    form {
+      width: 100%;
+      padding: 20px;
+
+      h4 {
+        font-size: 24px;
+      }
+
+      input,
+      button {
+        font-size: 16px;
+        padding: 10px 15px;
+      }
+    }
+  }
+
+  // Show the signup button on mobile only
+  .signupformobile {
+    display: block;
+  }
+
+  .loginformobile {
+    display: block;
+  }
+}
+
+
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  width: 100%;
+  padding-right: 30px;
+  /* Leave space for the icon */
+}
+
+.password-field i {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.form-group{
+  width: 100%;
+}

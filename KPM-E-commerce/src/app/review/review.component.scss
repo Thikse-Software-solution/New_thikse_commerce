@@ -1,0 +1,219 @@
+.review-mainBlock {
+    .review-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        text-align: center;
+        padding: 15px;
+
+        .review-headerBlock {
+            max-width: 750px;
+            margin: 0 auto;
+            position: relative;
+            margin-bottom: 20px;
+
+            .review-header {
+                letter-spacing: 0;
+                text-transform: none;
+                font-family: Lora, serif !important;
+                font-size: 40px;
+                line-height: 55px;
+                text-align: center;
+                font-weight: 400;
+                color: #000;
+                margin-bottom: 20px;
+            }
+
+            .review-desc {
+                letter-spacing: 0;
+                text-transform: none;
+                font-size: 16px;
+                text-align: center;
+                padding: 0 30px;
+                color: #000;
+            }
+        }
+    }
+
+    .review-areaBlock {
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        padding: 20px;
+        border-radius: 10px;
+
+        .review-overAll {
+            max-width: 500px;
+
+            .review-areaHead {
+                display: flex;
+                justify-content: start;
+
+                p {
+                    margin-bottom: 8px;
+                    font-family: lora;
+                    color: #545454;
+                    font-size: 15px;
+                    font-weight: 600;
+                }
+            }
+
+            .btn-sub {
+                background: rgb(244, 245, 247);
+                background: linear-gradient(111deg, rgb(244, 245, 247) 0%, rgb(217, 220, 228) 57%);
+                padding: 10px 20px;
+                border: unset;
+                border-radius: 5px;
+
+                &:hover {
+                    background: #99015B;
+                    color: #fff;
+                }
+            }
+        }
+
+        .over-allreview-update {
+            .reviews-section {
+                text-align: left;
+
+                .review-allReviewHead {
+                    p {
+                        margin-bottom: 8px;
+                        font-family: lora;
+                        color: #545454;
+                        font-size: 15px;
+                        font-weight: 500;
+                        padding-top: 15px;
+                        border-top: 1px solid #8080804a;
+                    }
+                }
+
+            }
+
+            .overall-reviewBlock {
+                .review-command {
+                    .command-block {
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 20px;
+
+                        .command {
+                            box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+                            padding: 10px;
+                            display: flex;
+                            border-radius: 5px;
+                            width: 300px;
+                            gap: 10px;
+                            flex-direction: column;
+
+                            .profile-img {
+                                width: 50px;
+                                height: 50px;
+                                overflow: hidden;
+
+                                img {
+                                    width: 100%;
+                                    height: 100%;
+                                    border-radius: 50%;
+                                    overflow: hidden;
+                                    object-fit: cover;
+                                }
+                            }
+
+                            .comment-inform {
+                                padding-left: 10px;
+                                border-left: 1px solid rgba(128, 128, 128, 0.2901960784);
+
+                                .commander-details {
+
+                                    .commander-name,
+                                    .commander-mail {
+                                        margin-bottom: 0px;
+                                        font-size: 12px;
+                                        font-family: "Lora", serif;
+                                        font-weight: 500;
+                                        color: #8a8a8a;
+                                        line-height: 1.5;
+                                    }
+                                }
+                            }
+
+                            .command-link {
+                                gap: 10px;
+                                width: 100%;
+                                padding-bottom: 10px;
+                                border-bottom: 1px solid rgba(128, 128, 128, 0.2901960784);
+                            }
+
+                            .review {
+                                p {
+                                    margin-bottom: 0px;
+                                    font-size: 12px;
+                                    font-family: "Lora", serif;
+                                    font-weight: 500;
+                                    color: #8a8a8a;
+                                    line-height: 1.5;
+                                    display: -webkit-box;
+                                    -webkit-line-clamp: 4;
+                                    -webkit-box-orient: vertical;
+                                    overflow: hidden;
+                                    text-overflow: ellipsis;
+                                    transition: 2s;
+
+                                    &:hover {
+                                        -webkit-line-clamp: unset;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.filled-star {
+    color: gold;
+}
+
+.empty-star {
+    color: black;
+    // border: 1px solid black;
+    background-color: white;
+    -webkit-text-fill-color: transparent;
+    /* Hide inner star */
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
+    /* Border color */
+}
+
+.star-rating {
+    font-size: 2rem;
+    color: #d3d3d3;
+    /* Default star color (unfilled) */
+    cursor: pointer;
+}
+
+.star-rating .star.filled {
+    color: gold;
+    /* Color for filled stars */
+}
+
+.star-rating .star:hover {
+    color: orange;
+}
+
+@media (max-width:500px) {
+    .review-overAll {
+        max-width: 100% !important;
+        width: 100%;
+    }
+}
+
+@media (max-width:800px) {
+    .review-overAll {
+        max-width: 100% !important;
+        width: 100%;
+    }
+}

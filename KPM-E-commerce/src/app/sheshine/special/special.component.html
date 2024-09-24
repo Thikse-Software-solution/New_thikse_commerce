@@ -1,0 +1,65 @@
+<section class="special-block">
+  <div class="special-main">
+    <div class="special-title">
+      <h3 class="header-3">Special Offers</h3>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row gy-4" >
+      <div class="col-lg-6 col-md-12" (click)="buyProduct(specialProducts[1])" >
+        <div class="row gy-4">
+          <div class="col-md-6 col-sm-12">
+            <div class="card-block">
+              <div class="card-img">
+                <img [src]="'data:image/png;base64,'+specialProducts[1]?.thumbnail" class="img-fluid" alt="Card Image 1" width="100%" height="100%">
+              </div>
+              <div class="special-offers">
+                <p>{{ specialProducts[1]?.discount }}</p>
+              </div>
+            
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12" (click)="buyProduct(specialProducts[2])" >
+            <div class="card-block">
+              <div class="card-img">
+                <img [src]="'data:image/png;base64,'+specialProducts[2]?.thumbnail" class="img-fluid" alt="Card Image 2" width="100%" height="100%">
+              </div>
+              <div class="special-offers">
+                <p>{{ specialProducts[2]?.discount }}</p>
+              </div>
+             
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12" (click)="buyProduct(specialProducts[3])" >
+            <div class="card-block">
+              <div class="card-img">
+                <img [src]="'data:image/png;base64,'+specialProducts[3]?.thumbnail" class="img-fluid" alt="Card Image 3" width="100%" height="100%">
+              </div>
+              <div class="special-offers">
+                <p>{{ specialProducts[3]?.discount }}</p>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12" (click)="buyProduct(specialProducts[4])">
+            <div class="card-block">
+              <div class="card-img">
+                <img [src]="'data:image/png;base64,'+specialProducts[4]?.thumbnail" class="img-fluid" alt="Card Image 4" width="100%" height="100%">
+              </div>
+              <div class="special-offers">
+              <p>{{ specialProducts[4]?.discount }}</p>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-12" (click)="buyProduct(specialProducts[0])">
+        <div class="special-left main">
+          <img [src]="'data:image/png;base64,'+specialProducts[0]?.thumbnail" class="img-fluid" alt="special Image" width="100%" height="100%">
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</section>
