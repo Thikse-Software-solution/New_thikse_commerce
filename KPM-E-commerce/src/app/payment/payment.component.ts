@@ -195,33 +195,48 @@ export class PaymentComponent implements OnInit {
 //     console.error('Selected address or products are missing.');
 //   }
 // }
- onProceedToPay(): void {
+onProceedToPay(): void {
+  if (this.selectedAddress && this.products.length > 0) {
+    // Ensure selectedAddress is not null and fetch values safely
+    const userName = this.selectedAddress?.name || 'Guest';  // Fallback to 'Guest' if no name
+    const userEmail = this.userEmail || 'customer@example.com';  // Use email from localStorage or provide a default
+    const userPhone = this.selectedAddress?.phone || '0000000000';  // Fallback to a default number
+
     this.paymentService.createOrder(this.totalAmount).subscribe(orderResponse => {
       const options: any = {
-        key: 'rzp_test_KicENYodOfmrEn',  // Enter Razorpay Key ID
+        key: 'rzp_test_KicENYodOfmrEn',  // Razorpay Key ID
         amount: this.totalAmount * 100,  // Amount in paise
         currency: 'INR',
-        name: 'kpm',
-        description: 'Purchase Description',
-        order_id: orderResponse.id,  // Order ID from Razorpay
+        name: 'Your Company Name',  // Set your company name
+        description: 'Order Payment',  // Description of the purchase
+        order_id: orderResponse.id,  // Razorpay Order ID
         handler: (response: any) => {
           // Handle payment success
           console.log('Payment success:', response);
           this.router.navigate(['/order-success']);
         },
         prefill: {
-          name: 'gopi',
-          email: 'customer@example.com',
-          contact: '9999999999'
+          name: userName,  // User's name from selected address
+          email: userEmail,  // User's email from local storage or fallback
+          contact: userPhone  // User's phone from selected address
+        },
+        notes: {
+          address: `${this.selectedAddress?.addressLine1 || ''}, ${this.selectedAddress?.addressLine2 || ''}`  // Safe access for address fields
         },
         theme: {
           color: '#3399cc'
         }
       };
+
       const rzp = new (window as any).Razorpay(options);
       rzp.open();
     }, error => {
       console.error('Error in creating order:', error);
     });
+  } else {
+    console.error('Selected address or products are missing.');
   }
+}
+
+
 }
