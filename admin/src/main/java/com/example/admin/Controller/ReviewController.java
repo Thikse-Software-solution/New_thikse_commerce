@@ -31,6 +31,10 @@ public class ReviewController {
         // Now save the review with the complete user object
         Review savedReview = reviewService.addReview(review);
 
+        // Update the average rating of the product
+        reviewService.updateProductAverageRating(savedReview.getProductId());
+
+
         // Create a response including the user's name and avatar
         ReviewResponse reviewResponse = new ReviewResponse(
                 savedReview.getId(),
