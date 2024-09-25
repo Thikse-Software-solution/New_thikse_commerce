@@ -165,25 +165,37 @@
   }
 }
 
+/* Hide the link on larger screens */
+.signupformobile {
+  display: none;
+}
+
+/* Show the link on mobile screens (max-width 767px) */
+@media (max-width: 767px) {
+  .signupformobile {
+    display: inline-block;
+  }
+}
 
 
-.password-field {
+.password-wrapper {
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
-.password-field input {
-  width: 100%;
-  padding-right: 30px;
-  /* Leave space for the icon */
+.password-wrapper input {
+  flex-grow: 1;
 }
 
-.password-field i {
+.toggle-icon {
   position: absolute;
-  top: 50%;
   right: 10px;
-  transform: translateY(-50%);
+  
   cursor: pointer;
-}
-.form-group{
-  width: 100%;
+  font-size: 18px;
+  span{
+    height: 20px;
+    width: 20px;
+  }
 }

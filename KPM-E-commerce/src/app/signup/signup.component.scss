@@ -183,3 +183,28 @@
 .form-group{
     width: 100%;
 }
+
+
+
+
+
+
+
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+   
+}
+
+.password-wrapper input {
+    flex-grow: 1;
+    width: 100%;
+}
+
+.toggle-icon {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}

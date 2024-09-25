@@ -29,7 +29,7 @@ export class TrendingComponent implements OnInit {
   }
 
   fetchProducts(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:8080/api/products/json');
+    return this.http.get<any[]>('http://192.168.1.10:8080/api/products/json');
   }
   buyProduct(product: any): void {
     this.router.navigate(['/sheshine/view', product.id]);

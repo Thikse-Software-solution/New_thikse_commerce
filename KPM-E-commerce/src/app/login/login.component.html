@@ -34,44 +34,40 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <h4>Login</h4>
     <span>or use your email and password</span>
-<div>
-    <label for="email">Email</label>
-    <input id="email" type="email" formControlName="email">
-    <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-        Valid email is required.
+
+    <div>
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email">
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            Valid email is required.
+        </div>
     </div>
-</div>
 
-<div>
-    <label for="password">Password</label>
-    <input id="password" type="password" formControlName="password">
-    <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-        Password is required.
+    <div>
+        <label for="password">Password</label>
+        <!-- Password Input with Toggle Icon -->
+        <div class="password-wrapper">
+            <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password">
+            <i class="toggle-icon" (click)="togglePasswordVisibility()">
+                <!-- Show/Hide Password Icon -->
+                <span *ngIf="!showPassword">👁️</span> <!-- Eye icon for "Show" -->
+                <span *ngIf="showPassword">🙈</span> <!-- Eye slash icon for "Hide" -->
+            </i>
+        </div>
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            Password is required.
+        </div>
     </div>
-</div>
-<div *ngIf="errorMessage">
-    <p>{{ errorMessage }}</p>
-</div>
 
+    <div *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+    </div>
 
+    <a routerLink="/forgotpassword">Forget Your Password?</a>
 
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Login</button>
 
-
-
-
-
-
-
-
-
-
-
-        <a routerLink="/forgotpassword">Forget Your Password?</a>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary" >Login</button>
-
-        <!-- Signup Link for Mobile -->
-        <a class="signupformobile" routerLink="/signup">Signup &#8594;</a>
-    </form>
-</div>
+    <!-- Signup Link for Mobile -->
+    <a class="signupformobile" routerLink="/signup">Signup &#8594;</a>
+</form>

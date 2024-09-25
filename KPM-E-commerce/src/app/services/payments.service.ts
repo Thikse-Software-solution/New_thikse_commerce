@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,15 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PaymentService {
-  private apiUrl = 'http://localhost:8080/api/orders/place'; // Adjust to your backend URL
+  private apiUrl = 'http://192.168.1.10:8080/api/orders/place'; // Adjust to your backend URL
 
   constructor(private http: HttpClient) {}
 
   // Create order
 
-   createOrder(amount: number): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { amount });
-  }
 
   // Verify payment
   verifyPayment(

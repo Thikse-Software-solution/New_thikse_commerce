@@ -13,7 +13,7 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class AuthService {
   private isAuthenticated: boolean = false;
-  private apiUrl = 'http://localhost:8080/api/users';
+  private apiUrl = 'http://192.168.1.10:8080/api/users';
 
   constructor(private http: HttpClient) {}
 
@@ -47,6 +47,7 @@ login(email: string, password: string): Observable<any> {
   }).pipe(
     tap((user: any) => {
       // Store user information as JSON in localStorage
+        window.location.reload();  // Reloads the current page
       localStorage.setItem('user', JSON.stringify(user));
 
       // Optionally store user ID separately if needed
@@ -126,5 +127,6 @@ login(email: string, password: string): Observable<any> {
     localStorage.removeItem('user');
     this.isAuthenticated = false;
     localStorage.clear();
+    
   }
 }

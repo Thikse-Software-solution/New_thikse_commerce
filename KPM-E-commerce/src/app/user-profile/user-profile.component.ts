@@ -4,6 +4,8 @@ import { User } from '../services/user-profile.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { SharedService } from '../services/shared.service';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -16,8 +18,9 @@ export class UserProfileComponent implements OnInit {
   profileForm: FormGroup;
   selectedAvatar: File | undefined;
   userId: number | null = null;
+  userProfile: any;
 
-  constructor(private userService: UserService, private fb: FormBuilder, private router: Router) {
+  constructor(private userService: UserService, private fb: FormBuilder, private router: Router,private SharedService: SharedService) {
       this.profileForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [ Validators.email]],
@@ -30,7 +33,14 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const userString = localStorage.getItem('user');
-    
+      const user = localStorage.getItem('user');
+     if (user) {
+      const parsedUser = JSON.parse(user); // Parse the user object
+      const email = parsedUser.email; // Extract the email
+      this.fetchUserProfile(email); // Fetch user profile using the email
+    } else {
+      console.error('No user found in local storage');
+    }
     if (userString) {
       this.user = JSON.parse(userString) as User;
       this.userId = this.user.id;
@@ -48,6 +58,20 @@ export class UserProfileComponent implements OnInit {
       console.error('User not found in localStorage');
     }
   }
+ 
+
+
+   fetchUserProfile(email: string): void {
+    this.userService.getUserProfileByEmail(email).subscribe(
+      (response) => {
+        this.userProfile = response;
+        console.log('User Profile:', this.userProfile);
+      },
+      (error) => {
+        console.error('Error fetching user profile:', error);
+      }
+    );
+  }
 
  onFileSelected(event: any): void {
     const file = event.target.files[0];
@@ -61,6 +85,8 @@ export class UserProfileComponent implements OnInit {
 signOut(): void {
   this.userService.signOut();
   localStorage.removeItem('user');
+
+  localStorage.clear(); 
   this.user = null;
 
   // Detect screen width to determine the device type
@@ -96,17 +122,17 @@ signOut(): void {
   }
 
  updateProfile(): void {
-    if (this.profileForm.valid) {
-      const updatedUser = this.profileForm.value;
+  if (this.profileForm.valid) {
+    const updatedUser = this.profileForm.value;
 
-      // Create form data object
-      const formData = new FormData();
-      formData.append('user', JSON.stringify(updatedUser));
-      if (this.selectedAvatar) {
-        formData.append('avatar', this.selectedAvatar);
-      }
+    // Create form data object
+    const formData = new FormData();
+    formData.append('user', JSON.stringify(updatedUser));
+    if (this.selectedAvatar) {
+      formData.append('avatar', this.selectedAvatar);
+    }
 
-         // Call service to update profile
+    // Call service to update profile
     this.userService.updateProfile(this.userId!, formData).subscribe(
       (response) => {
         console.log('Profile updated successfully:', response);
@@ -124,46 +150,42 @@ signOut(): void {
           gender: updatedUser.gender,
           avatarUrl: response.avatarUrl ? response.avatarUrl : existingUser.avatarUrl, // Update avatar if provided
         };
-
+       
         // Update the new user data in localStorage (keeping userId intact)
         localStorage.setItem('user', JSON.stringify(updatedUserWithAvatar));
 
         // Update the component's user object to reflect changes immediately in the UI
         this.user = updatedUserWithAvatar;
 
-        // Optionally, show a success message
-        // alert('Profile updated successfully');
+        // Fetch the updated user profile immediately after the update
+        this.fetchUserProfile(this.userProfile.email);
+        
 
-         // Show success popup
-      Swal.fire({
-        icon: 'success',
-        title: 'Success',
-        text: 'Profile updated successfully!',
-        confirmButtonText: 'OK'
-      }).then(() => {
-        // Reset the form after the popup is closed
-        // this.resetForm.reset();
-      });
-
-        // Optionally, display a success message
-         
-            this.editMode = false; // Exit edit mode
-         
-        },
-        (error) => {
-          console.error('Error updating profile:', error);
-            // Show error popup if form is invalid
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Error updating profile.',
-        confirmButtonText: 'OK'
-      })
-          // Optionally, display an error message
-        }
-      );
-    }
+        // Show success popup
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'Profile updated successfully!',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          // Optionally reset the form or handle further actions after closing the popup
+          this.editMode = false; // Exit edit mode
+        });
+      },
+      (error) => {
+        console.error('Error updating profile:', error);
+        // Show error popup if form is invalid
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error updating profile.',
+          confirmButtonText: 'OK'
+        });
+      }
+    );
   }
+}
+
 
   closeNavbar() {
     const navbarCollapse = document.getElementById('navbarNav');

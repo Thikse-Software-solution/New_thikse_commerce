@@ -259,6 +259,7 @@ public ResponseEntity<?> verifyPayment(@RequestBody Map<String, String> paymentD
         }
     }
 
+
 //    @PutMapping("/{orderId}/status")
 //    public ResponseEntity<?> updateOrderStatus(@PathVariable Long orderId, @RequestBody String status, @RequestParam Long userId) {
 //        try {
@@ -301,6 +302,7 @@ public ResponseEntity<?> updateOrderStatus(
     } catch (Exception e) {
         logger.error("Internal server error while updating order ID {} to status {}: {}", orderId, status, e.getMessage(), e);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while updating the order.");
+
     }
 }
 
