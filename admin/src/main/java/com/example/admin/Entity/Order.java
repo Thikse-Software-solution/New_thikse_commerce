@@ -46,6 +46,7 @@ public class Order {
     @Column(name = "total_price", nullable = false)  // New field to store total price
     private double totalPrice;
 
+    private String razorpayOrderId;
     // Getters and Setters
 
     public Long getOrderId() {
@@ -131,5 +132,13 @@ public class Order {
     // Method to calculate total price
     public void calculateTotalPrice() {
         this.totalPrice = this.amount * this.quantity;
+    }
+
+    public String getRazorpayOrderId() {
+        return razorpayOrderId;
+    }
+
+    public void setRazorpayOrderId(String razorpayOrderId) {
+        this.razorpayOrderId = razorpayOrderId;
     }
 }

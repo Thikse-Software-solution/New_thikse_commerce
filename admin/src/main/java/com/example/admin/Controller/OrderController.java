@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -146,6 +147,23 @@ public class OrderController {
             order.setProduct(product);  // Set product details
             order.setTotalPrice(totalPrice);  // Set the total price for the order
 
+
+            // Check if enough stock is available
+            if (product.getStockQuantity() < orderDTO.getQuantity()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Not enough stock available for product: " + product.getName());
+            }
+
+            // Reduce the product stock
+            product.setStockQuantity(product.getStockQuantity() - orderDTO.getQuantity());
+
+            // Save the updated product stock in the database
+            productService.saveProduct(product);  // Assuming the ProductService has a saveProduct method
+
+            // Set product details in the order
+            order.setProduct(product);
+            order.setTotalPrice(totalPrice);  // Set the total price for the order
+
             // Save the order to the database
             orderRepository.save(order);
 
@@ -160,29 +178,58 @@ public class OrderController {
         }
     }
 
+//
+//    @PostMapping("/verifyPayment")
+//    public ResponseEntity<?> verifyPayment(@RequestBody Map<String, String> paymentDetails) {
+//        try {
+//            String razorpayOrderId = paymentDetails.get("razorpay_order_id");
+//            String razorpayPaymentId = paymentDetails.get("razorpay_payment_id");
+//            String razorpaySignature = paymentDetails.get("razorpay_signature");
+//
+//            // Verify the payment using Razorpay's SDK or using your logic
+//            boolean isValid = paymentService.verifyPaymentSignature(razorpayOrderId, razorpayPaymentId, razorpaySignature);
+//
+//            if (isValid) {
+//                // Update order status to "paid"
+//                return ResponseEntity.ok("Payment verified successfully.");
+//            } else {
+//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid payment signature.");
+//            }
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Payment verification failed.");
+//        }
+//    }
+//
+//
+@PostMapping("/verifyPayment")
+public ResponseEntity<?> verifyPayment(@RequestBody Map<String, String> paymentDetails) {
+    try {
+        String razorpayOrderId = paymentDetails.get("razorpay_order_id");
+        String razorpayPaymentId = paymentDetails.get("razorpay_payment_id");
+        String razorpaySignature = paymentDetails.get("razorpay_signature");
 
-    @PostMapping("/verifyPayment")
-    public ResponseEntity<?> verifyPayment(@RequestBody Map<String, String> paymentDetails) {
-        try {
-            String razorpayOrderId = paymentDetails.get("razorpay_order_id");
-            String razorpayPaymentId = paymentDetails.get("razorpay_payment_id");
-            String razorpaySignature = paymentDetails.get("razorpay_signature");
+        // Verify the payment using Razorpay's SDK or your custom logic
+        boolean isValid = paymentService.verifyPaymentSignature(razorpayOrderId, razorpayPaymentId, razorpaySignature);
 
-            // Verify the payment using Razorpay's SDK or using your logic
-            boolean isValid = paymentService.verifyPaymentSignature(razorpayOrderId, razorpayPaymentId, razorpaySignature);
-
-            if (isValid) {
-                // Update order status to "paid"
-                return ResponseEntity.ok("Payment verified successfully.");
+        if (isValid) {
+            // Update order status to "Yet to Dispatch"
+            Order order = orderService.findOrderByRazorpayOrderId(razorpayOrderId);
+            if (order != null) {
+                order.setOrderStatus("Yet to Dispatch");
+                orderService.saveOrder(order);  // Save updated order status
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid payment signature.");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found with Razorpay Order ID: " + razorpayOrderId);
             }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Payment verification failed.");
+
+            return ResponseEntity.ok("Payment verified successfully, order status updated to 'Yet to Dispatch'.");
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid payment signature.");
         }
+    } catch (Exception e) {
+        logger.error("Error while verifying payment: {}", e.getMessage(), e);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Payment verification failed.");
     }
-
-
+}
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getOrdersByUser(@PathVariable Long userId) {
@@ -212,22 +259,52 @@ public class OrderController {
         }
     }
 
-    @PutMapping("/{orderId}/status")
-    public ResponseEntity<?> updateOrderStatus(@PathVariable Long orderId, @RequestBody String status, @RequestParam Long userId) {
-        try {
-            // Trim the status to remove any surrounding whitespace and quotes
-            status = status.trim().replaceAll("^\"|\"$", "");
 
-            Order updatedOrder = orderService.updateOrderStatus(orderId, status, userId);
-            return ResponseEntity.ok(updatedOrder);
-        } catch (IllegalArgumentException e) {
-            logger.error("Bad request while updating order ID {} to status {}: {}", orderId, status, e.getMessage());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        } catch (Exception e) {
-            logger.error("Internal server error while updating order ID {} to status {}: {}", orderId, status, e.getMessage(), e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while updating the order.");
-        }
+//    @PutMapping("/{orderId}/status")
+//    public ResponseEntity<?> updateOrderStatus(@PathVariable Long orderId, @RequestBody String status, @RequestParam Long userId) {
+//        try {
+//            // Trim the status to remove any surrounding whitespace and quotes
+//            status = status.trim().replaceAll("^\"|\"$", "");
+//
+//            Order updatedOrder = orderService.updateOrderStatus(orderId, status, userId);
+//            return ResponseEntity.ok(updatedOrder);
+//        } catch (IllegalArgumentException e) {
+//            logger.error("Bad request while updating order ID {} to status {}: {}", orderId, status, e.getMessage());
+//            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+//        } catch (Exception e) {
+//            logger.error("Internal server error while updating order ID {} to status {}: {}", orderId, status, e.getMessage(), e);
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while updating the order.");
+//        }
+//    }
+@PutMapping("/{orderId}/status")
+public ResponseEntity<?> updateOrderStatus(
+        @PathVariable Long orderId,
+        @RequestBody String status,
+        @RequestParam Long userId) {
+    try {
+        // Trim the status to remove any surrounding whitespace and quotes
+        status = status.trim().replaceAll("^\"|\"$", "");
+
+        // Update order status using the provided userId
+        Order updatedOrder = orderService.updateOrderStatus(orderId, status, userId);
+
+        // Create a response object including both the updated order and the user ID
+        Map<String, Object> response = new HashMap<>();
+        response.put("order", updatedOrder);
+        response.put("userId", userId);  // Return the user ID as part of the response
+
+        return ResponseEntity.ok(response);
+
+    } catch (IllegalArgumentException e) {
+        logger.error("Bad request while updating order ID {} to status {}: {}", orderId, status, e.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+
+    } catch (Exception e) {
+        logger.error("Internal server error while updating order ID {} to status {}: {}", orderId, status, e.getMessage(), e);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while updating the order.");
+
     }
+}
 
     @GetMapping
     public ResponseEntity<?> getAllOrders() {

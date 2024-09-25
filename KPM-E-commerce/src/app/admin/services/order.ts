@@ -1,6 +1,12 @@
 export interface Order {
-  id: number;
+  orderId:number;
   productName: string;
   quantity: number;
-  status: string;
+  orderStatus: string;
+  orderAddress:{
+    name:string;
+  };
+  product:{
+    name:string;
+  }
 }
