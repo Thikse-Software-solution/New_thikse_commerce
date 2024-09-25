@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class SignupComponent implements OnInit {
   @Input() isLogin!: boolean;
   @Output() toggleLogin = new EventEmitter<boolean>(); // Event to notify parent component
-  showPassword: boolean = false;
+  showPassword = false;  
   isSubmitting = false; 
   registerForm: FormGroup;
   errorMessage: string = '';

@@ -49,7 +49,7 @@ public class EmailService {
         long timestamp = new Date().getTime();
         String encodedTimestamp = URLEncoder.encode(String.valueOf(timestamp), StandardCharsets.UTF_8);
 
-        String resetLink = "http://192.168.1.6:4200/E-coomerce/resetpassword?email=" +
+        String resetLink = "http://192.168.1.10:4200/E-coomerce/resetpassword?email=" +
                 URLEncoder.encode(to, StandardCharsets.UTF_8) +
                 "&timestamp=" + encodedTimestamp;
 
@@ -137,7 +137,7 @@ public class EmailService {
     // Send OTP link method
     // Generate OTP link method
     public String generateOtpLink(String email, String otp) {
-        String baseUrl = "http://192.168.1.6:4200/verify-otp"; // Replace with your frontend URL or API endpoint
+        String baseUrl = "http://192.168.1.10:4200/verify-otp"; // Replace with your frontend URL or API endpoint
         return baseUrl + "?email=" + email + "&otp=" + otp;
     }
 

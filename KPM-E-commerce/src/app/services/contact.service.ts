@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ContactService {
-  private apiUrl = 'http://localhost:8080/api/contact/submit'; // Replace with your actual backend API endpoint
+  private apiUrl = 'http://192.168.1.10:8080/api/contact/submit'; // Replace with your actual backend API endpoint
 
   constructor(private http: HttpClient) {}
 

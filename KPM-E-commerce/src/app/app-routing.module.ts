@@ -19,7 +19,6 @@ import { PaymentComponent } from './payment/payment.component';
 import { TogglingComponent } from './sheshine/toggling/toggling.component';
 import { ProductViewDetailsComponent } from './sheshine/product-view-details/product-view-details.component';
 import { Router, NavigationEnd } from '@angular/router';
-import { OrderHistoryComponent } from './order-history/order-history.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ShineComponent } from './shine/shine/shine.component';
 import { ShineHomeComponent } from './shine/shine-home/shine-home.component';
@@ -49,6 +48,8 @@ import { ShippingDetailComponent } from './admin/admin/shipping-detail/shipping-
 import { SummaryCardComponent } from './admin/admin/summary-card/summary-card.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
+import { OrderListComponent } from './order-list/order-list.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 
 
@@ -133,13 +134,15 @@ const routes: Routes = [
  { path: 'toggle', component: TogglingComponent, canActivate: [AuthGuard] },
   { path: 'payment/:id', component: PaymentComponent },
   { path: 'payment', component: PaymentComponent },
-  { path: 'order', component: OrderHistoryComponent },
+
   { path: 'user', component: UserProfileComponent, canActivate: [AuthGuard] },
   { path: 'image360', component: Image360ViewComponent },
   { path: 'about', component: AboutComponent },
   { path: 'forgotpassword', component: ForgotPasswordComponent },
   { path: 'resetpassword', component: ResetPasswordComponent },
-    { path: 'verify', component: VerifyAccountComponent },
+  { path: 'verify', component: VerifyAccountComponent },
+  { path: 'orders', component: OrderListComponent },
+  { path: 'orders/:id', component: OrderDetailsComponent },
 
 
 ];

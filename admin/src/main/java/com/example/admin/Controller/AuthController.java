@@ -120,7 +120,7 @@ public class AuthController {
 //                return ResponseEntity.ok("Login successful.");
 //            } else {
 //                // If not verified, send verification email and return a forbidden response
-//                String verificationLink = "http://192.168.1.6:4200/E-coomerce/verify?token=" + user.getVerificationToken();
+//                String verificationLink = "http://192.168.1.10:4200/E-coomerce/verify?token=" + user.getVerificationToken();
 //                String subject = "Account Verification Reminder";
 //                String message = "You need to verify your account before logging in. Please verify your account by clicking the following link: " + verificationLink;
 //                emailService.sendEmail(user.getEmail(), subject, message);

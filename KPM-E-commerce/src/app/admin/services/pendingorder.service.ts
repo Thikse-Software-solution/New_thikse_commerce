@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PendingOrderService {
-  private baseUrl = 'http://localhost:8080/api/analytics/pending-orders';
+  private baseUrl = 'http://192.168.1.10:8080/api/analytics/pending-orders';
 
   constructor(private http: HttpClient) {}
 

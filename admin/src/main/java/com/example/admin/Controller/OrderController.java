@@ -215,6 +215,9 @@ public class OrderController {
     @PutMapping("/{orderId}/status")
     public ResponseEntity<?> updateOrderStatus(@PathVariable Long orderId, @RequestBody String status, @RequestParam Long userId) {
         try {
+            // Trim the status to remove any surrounding whitespace and quotes
+            status = status.trim().replaceAll("^\"|\"$", "");
+
             Order updatedOrder = orderService.updateOrderStatus(orderId, status, userId);
             return ResponseEntity.ok(updatedOrder);
         } catch (IllegalArgumentException e) {

@@ -33,7 +33,7 @@ import { SpecialComponent } from './sheshine/special/special.component';
 import { TestmonialComponent } from './sheshine/testmonial/testmonial.component';
 import { CustomerComponent } from './sheshine/customer/customer.component';
 import { FooterComponent } from './footer/footer.component';
-import { OrderHistoryComponent } from './order-history/order-history.component';
+
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ShineCardComponent } from './shine/shine-card/shine-card.component';
 import { ShineComponent } from './shine/shine/shine.component';
@@ -73,6 +73,8 @@ import { BestSelleerComponent } from './shine/best-selleer/best-selleer.componen
 import { CustomerManagementComponent } from './admin/admin/customer-management/customer-management.component';
 import { ReviewComponent } from './review/review.component';
 import { VerifyAccountComponent } from './verify-account/verify-account.component';
+import { OrderListComponent } from './order-list/order-list.component';
+import { OrderDetailsComponent } from './order-details/order-details.component';
 
 
 
@@ -109,7 +111,6 @@ declarations: [
     TestmonialComponent,
     CustomerComponent,
     FooterComponent,
-    OrderHistoryComponent,
     UserProfileComponent,
     ShineComponent,
     ShineCardComponent,
@@ -146,7 +147,9 @@ declarations: [
     BestSelleerComponent,
    CustomerManagementComponent,
       ReviewComponent,
-      VerifyAccountComponent
+      VerifyAccountComponent,
+      OrderListComponent,
+      OrderDetailsComponent
    ],
   imports: [
     BrowserModule,

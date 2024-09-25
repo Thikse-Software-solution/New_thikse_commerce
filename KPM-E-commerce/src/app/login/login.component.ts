@@ -18,7 +18,7 @@ export class LoginComponent {
 //   password: string = '';
   loginForm: FormGroup;
   @Input() isLogin!: boolean;
-  showPassword: boolean = false;
+  showPassword = false;
     errorMessage: string = '';
 
 
@@ -36,7 +36,7 @@ export class LoginComponent {
   }
     // Toggle password visibility
     togglePasswordVisibility() {
-        this.showPassword = !this.showPassword;
+           this.showPassword = !this.showPassword;  
   }
   
 onSubmit(): void {

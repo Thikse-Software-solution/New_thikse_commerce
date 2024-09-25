@@ -89,6 +89,7 @@ public class OrderService {
                 .orElseThrow(() -> new IllegalArgumentException("Order not found with ID: " + orderId));
     }
 
+    // Update the order status
     @Transactional
     public Order updateOrderStatus(Long orderId, String status, Long userId) {
         logger.info("Updating order ID: {} to status: {} for user ID: {}", orderId, status, userId);

@@ -13,14 +13,14 @@
                                 <div *ngIf="!editMode">
                                     <div class="card-body text-center">
                                         <div class="user-avatar mb-3">
-                                            <img [src]="'data:image/png;base64,'+user.avatarUrl" alt="{{ user.name }}"
+                                            <img [src]="'data:image/png;base64,'+userProfile.avatarUrl" alt="{{ user.name }}"
                                                 class="rounded-circle img-fluid">
                                         </div>
-                                        <h2>{{ user.name }}</h2>
-                                        <p>Email: {{ user.email }}</p>
-                                        <p>Phone: {{ user.mobileNumber }}</p>
-                                        <p>Date of Birth: {{ user.dob }}</p>
-                                        <p>Gender: {{ user.gender }}</p>
+                                        <h2>{{ userProfile.name }}</h2>
+                                        <p>Email: {{ userProfile.email }}</p>
+                                        <p>Phone: {{ userProfile.mobileNumber }}</p>
+                                        <p>Date of Birth: {{ userProfile.dob }}</p>
+                                        <p>Gender: {{ userProfile.gender }}</p>
                                         
                                         <button class="btn btn-primary" (click)="enableEdit()">Edit Profile</button>
                                         <div data-bs-dismiss="modal" class="buttonclose">

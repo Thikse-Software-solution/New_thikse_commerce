@@ -18,6 +18,8 @@ export class NavtabComponent implements OnInit {
   showKpnRunner: boolean = true;
   userId: number | null = null;
   user: User | null = null;
+  userProfile: any;
+  profilePollingInterval: any;
 
   constructor(
     private router: Router,
@@ -29,6 +31,20 @@ export class NavtabComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+
+      
+     const user = localStorage.getItem('user'); // Retrieve user object from local storage
+    if (user) {
+      const parsedUser = JSON.parse(user); // Parse the user object
+      const email = parsedUser.email; // Extract the email
+      this.fetchUserProfile(email); // Fetch user profile using the email
+       this.startProfilePolling(email); // Start polling
+    } else {
+      console.error('No user found in local storage');
+    }
+
+
+
    const userString = localStorage.getItem('user');
 if (userString) {
   this.user = JSON.parse(userString) as User;
@@ -50,6 +66,38 @@ if (userString) {
     });
   }
 
+
+  
+
+  // Stop polling when the component is destroyed
+  // ngOnDestroy(): void {
+  //   if (this.profilePollingInterval) {
+  //     clearInterval(this.profilePollingInterval); // Stop polling
+  //   }
+  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // Poll the user profile every 5 seconds
+  startProfilePolling(email: string): void {
+    this.profilePollingInterval = setInterval(() => {
+      this.fetchUserProfile(email);
+    }, 5000); // Poll every 5000ms = 5 seconds
+  }
+
   loadUserIdFromLocalStorage() {
     const userData = localStorage.getItem('user');
     if (userData) {
@@ -65,6 +113,25 @@ if (userString) {
     }
   }
 
+
+  fetchUserProfile(email: string): void {
+    this.userService.getUserProfileByEmail(email).subscribe(
+      (response) => {
+        this.userProfile = response;  // Assign the response to userProfile
+        console.log('User Profile:', this.userProfile);
+      },
+      (error) => {
+        console.error('Error fetching user profile:', error);
+      }
+    );
+  }
+
+  // Stop polling when the component is destroyed
+  ngOnDestroy(): void {
+    if (this.profilePollingInterval) {
+      clearInterval(this.profilePollingInterval); // Stop polling
+    }
+  }
 
   isRouteActive(route: string): boolean {
     return this.router.url === route;
