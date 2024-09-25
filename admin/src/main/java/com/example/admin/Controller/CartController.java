@@ -41,6 +41,27 @@ public class CartController {
     }
 
     // Add or update cart items
+//    @PostMapping("/add")
+//    public ResponseEntity<?> addOrUpdateCartItem(@RequestParam Long userId, @RequestParam Long productId, @RequestParam int quantity) {
+//        Optional<User> userOptional = userService.getUserById(userId);
+//        if (userOptional.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + userId);
+//        }
+//
+//        Optional<Product> productOptional = Optional.ofNullable(productService.getProductById(productId));
+//        if (productOptional.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found with ID: " + productId);
+//        }
+//
+//        try {
+//            // Pass the User and Product IDs to the service method
+//            Cart cart = cartService.addOrUpdateCartItem(userOptional.get().getId(), productOptional.get().getId(), quantity);
+//            return ResponseEntity.ok(cart);
+//        } catch (Exception e) {
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding/updating cart item: " + e.getMessage());
+//        }
+//    }
+// Add or update cart items
     @PostMapping("/add")
     public ResponseEntity<?> addOrUpdateCartItem(@RequestParam Long userId, @RequestParam Long productId, @RequestParam int quantity) {
         Optional<User> userOptional = userService.getUserById(userId);
@@ -53,12 +74,21 @@ public class CartController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found with ID: " + productId);
         }
 
+        Product product = productOptional.get();
+
+        // Check if the requested quantity exceeds the available stock
+        if (quantity > product.getStockQuantity()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Requested quantity exceeds available stock. Available stock: " + product.getStockQuantity());
+        }
+
         try {
             // Pass the User and Product IDs to the service method
-            Cart cart = cartService.addOrUpdateCartItem(userOptional.get().getId(), productOptional.get().getId(), quantity);
+            Cart cart = cartService.addOrUpdateCartItem(userOptional.get().getId(), product.getId(), quantity);
             return ResponseEntity.ok(cart);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding/updating cart item: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error adding/updating cart item: " + e.getMessage());
         }
     }
 

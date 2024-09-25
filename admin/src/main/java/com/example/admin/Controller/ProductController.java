@@ -242,5 +242,32 @@ public class ProductController {
         existingProduct.setTrend(updatedProduct.getTrend());
         existingProduct.setSpecial(updatedProduct.getSpecial());
     }
+    // Reduce product stock by a specified amount
+    @PutMapping("/update-stock/{id}")
+    public ResponseEntity<?> updateStock(
+            @PathVariable Long id,
+            @RequestParam("reduceQuantity") int reduceQuantity) {
+        try {
+            Product existingProduct = productService.getProductById(id);
+
+            // Check if stock is available
+            if (existingProduct.getStockQuantity() >= reduceQuantity) {
+                // Reduce the stock
+                existingProduct.setStockQuantity(existingProduct.getStockQuantity() - reduceQuantity);
+                Product savedProduct = productService.saveProduct(existingProduct);
+                return ResponseEntity.ok(savedProduct);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Not enough stock available. Current stock: " + existingProduct.getStockQuantity());
+            }
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Product not found with ID: " + id);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error updating product stock: " + e.getMessage());
+        }
+    }
+
 
 }
