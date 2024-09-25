@@ -7,7 +7,7 @@
         </div>
         <span>or use your email and password</span>
 
-       
+
         <div class="form-group">
             <input type="email" placeholder="Email" formControlName="email" class="form-control"
                 [ngClass]="{'is-invalid': loginForm.get('email')?.invalid && (loginForm.get('email')?.touched || loginForm.get('email')?.dirty)}" />
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        
+
         <div class="form-group password-field">
             <input [type]="showPassword ? 'text' : 'password'" placeholder="Password" formControlName="password"
                 class="form-control"
@@ -40,7 +40,6 @@
     <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
         Valid email is required.
     </div>
-</div>
 
 <div class="w-100">
     <label for="password">Password</label>
@@ -48,30 +47,17 @@
     <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
         Password is required.
     </div>
-</div>
-<div *ngIf="errorMessage">
-    <p>{{ errorMessage }}</p>
-</div>
 
+    <div *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+    </div>
 
+    <a routerLink="/forgotpassword">Forget Your Password?</a>
 
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Login</button>
 
-
-
-
-
-
-
-
-
-
-
-        <a routerLink="/forgotpassword">Forget Your Password?</a>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary" >Login</button>
-
-        <!-- Signup Link for Mobile -->
-        <a class="signupformobile" routerLink="/signup">Signup &#8594;</a>
-    </form>
+    <!-- Signup Link for Mobile -->
+    <a class="signupformobile" routerLink="/signup">Signup &#8594;</a>
+</form>
 </div>

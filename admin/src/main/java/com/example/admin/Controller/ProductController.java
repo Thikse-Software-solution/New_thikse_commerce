@@ -7,15 +7,14 @@ import com.example.admin.Entity.Product;
 import com.example.admin.Service.ProductService;
 import com.example.admin.Service.ReviewService;
 import jakarta.persistence.EntityNotFoundException;
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://192.168.1.20:4200")
@@ -242,5 +241,32 @@ public class ProductController {
         existingProduct.setTrend(updatedProduct.getTrend());
         existingProduct.setSpecial(updatedProduct.getSpecial());
     }
+    // Reduce product stock by a specified amount
+    @PutMapping("/update-stock/{id}")
+    public ResponseEntity<?> updateStock(
+            @PathVariable Long id,
+            @RequestParam("reduceQuantity") int reduceQuantity) {
+        try {
+            Product existingProduct = productService.getProductById(id);
+
+            // Check if stock is available
+            if (existingProduct.getStockQuantity() >= reduceQuantity) {
+                // Reduce the stock
+                existingProduct.setStockQuantity(existingProduct.getStockQuantity() - reduceQuantity);
+                Product savedProduct = productService.saveProduct(existingProduct);
+                return ResponseEntity.ok(savedProduct);
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body("Not enough stock available. Current stock: " + existingProduct.getStockQuantity());
+            }
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Product not found with ID: " + id);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error updating product stock: " + e.getMessage());
+        }
+    }
+
 
 }

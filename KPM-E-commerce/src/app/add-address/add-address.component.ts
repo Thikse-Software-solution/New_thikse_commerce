@@ -19,6 +19,18 @@ export class AddAddressComponent implements OnInit {
     state: '',
     zip: ''
   };
+    // Method to check if the form is valid
+  isFormValid(): boolean {
+    return (
+      this.newAddress.name.trim() !== '' &&
+      this.newAddress.type.trim() !== '' &&
+      /^[0-9]{10}$/.test(this.newAddress.phone) && // Validate 10-digit phone
+      this.newAddress.addressLine1.trim() !== '' &&
+      this.newAddress.city.trim() !== '' &&
+      this.newAddress.state.trim() !== '' &&
+      this.newAddress.zip.trim() !== ''
+    );
+  }
   
   userId: number | null = null;
   addressId: number | null = null; // Store the address ID if editing
@@ -60,6 +72,7 @@ export class AddAddressComponent implements OnInit {
       this.newAddress = address; // Pre-fill the form with the existing address data
     });
   }
+  
 
   // Method to add or update address
   addAddress() {

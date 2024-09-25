@@ -1,5 +1,11 @@
 package com.example.admin.Service;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,14 +13,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-
-import jakarta.mail.MessagingException;
-import jakarta.mail.internet.MimeMessage;
-
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.List;
 
 @Service
 public class EmailService {
@@ -137,7 +135,7 @@ public class EmailService {
     // Send OTP link method
     // Generate OTP link method
     public String generateOtpLink(String email, String otp) {
-        String baseUrl = "http://192.168.1.6:4200/verify-otp"; // Replace with your frontend URL or API endpoint
+        String baseUrl = "http://192.168.1.10:4200/verify-otp"; // Replace with your frontend URL or API endpoint
         return baseUrl + "?email=" + email + "&otp=" + otp;
     }
 

@@ -1,7 +1,6 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 import { User } from './user-profile.model';
 
 @Injectable({
@@ -13,9 +12,9 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  // Fetch the user profile by ID from the backend
-  getUserProfileById(userId: number): Observable<User> {
-    return this.http.get<User>(`${this.apiUrl}/${userId}`);
+  getUserProfileByEmail(email: string): Observable<any> {
+    const params = new HttpParams().set('email', email);
+    return this.http.get(`${this.apiUrl}/profile`, { params });
   }
 
   updateProfile(userId: number, formData: FormData): Observable<any> {

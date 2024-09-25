@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 
+import { catchError } from 'rxjs/operators';
 import { Product } from '../sheshine/services/product.service';
-import { map, catchError } from 'rxjs/operators';
 // Adjust import path if necessary
 // export interface CartItem {
 //   id: number;           // Unique identifier for the cart item
@@ -100,7 +100,7 @@ export class CartService {
       .pipe(catchError(this.handleError));
   }
 
-  
+
 
   // Remove an item from the cart by cartItemId
   removeCartItem(cartItemId: number): Observable<any> {

@@ -13,4 +13,6 @@ export class SharedService {
   changeSearchQuery(query: string) {
     this.searchQuerySource.next(query);
   }
+
+ 
 }

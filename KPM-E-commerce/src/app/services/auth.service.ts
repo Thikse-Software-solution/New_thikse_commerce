@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-  HttpParams,
+    HttpClient,
+    HttpErrorResponse,
+    HttpHeaders,
+    HttpParams,
 } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { User } from './user-profile.model';
 
 @Injectable({
   providedIn: 'root',
@@ -48,6 +47,7 @@ login(email: string, password: string): Observable<any> {
   }).pipe(
     tap((user: any) => {
       // Store user information as JSON in localStorage
+        window.location.reload();  // Reloads the current page
       localStorage.setItem('user', JSON.stringify(user));
 
       // Optionally store user ID separately if needed
@@ -127,5 +127,6 @@ login(email: string, password: string): Observable<any> {
     localStorage.removeItem('user');
     this.isAuthenticated = false;
     localStorage.clear();
+
   }
 }

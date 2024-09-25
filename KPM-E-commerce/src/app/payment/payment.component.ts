@@ -3,8 +3,9 @@ import { Address, AddressService } from '../services/address.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService, Product } from '../sheshine/services/product.service';
 import { OrderService } from '../services/order.service';
-import { Order } from '../services/order.model';
+
 import { PaymentService } from '../services/payments.service';
+import { Order } from '../services/order.model';
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
@@ -14,6 +15,7 @@ export class PaymentComponent implements OnInit {
   selectedAddress: Address | null = null;
   @Input() products: Product[] = [];
   totalAmount: number = 0;
+  
 
   userId: number | null = null;
   userEmail: string | null = null;
@@ -195,33 +197,85 @@ export class PaymentComponent implements OnInit {
 //     console.error('Selected address or products are missing.');
 //   }
 // }
- onProceedToPay(): void {
-    this.paymentService.createOrder(this.totalAmount).subscribe(orderResponse => {
-      const options: any = {
-        key: 'rzp_test_KicENYodOfmrEn',  // Enter Razorpay Key ID
-        amount: this.totalAmount * 100,  // Amount in paise
-        currency: 'INR',
-        name: 'kpm',
-        description: 'Purchase Description',
-        order_id: orderResponse.id,  // Order ID from Razorpay
-        handler: (response: any) => {
-          // Handle payment success
-          console.log('Payment success:', response);
-          this.router.navigate(['/order-success']);
-        },
-        prefill: {
-          name: 'gopi',
-          email: 'customer@example.com',
-          contact: '9999999999'
-        },
-        theme: {
-          color: '#3399cc'
-        }
+onProceedToPay(): void {
+  if (this.selectedAddress && this.products.length > 0) {
+    const addressId = this.selectedAddress.id;  // Get the selected address ID
+    const userName = this.selectedAddress?.name || 'Guest';  // Fallback to 'Guest' if no name
+    const userEmail = this.userEmail || 'customer@example.com';  // Use email from localStorage or provide a default
+    const userPhone = this.selectedAddress?.phone || '0000000000';  // Fallback to a default number
+
+    // Calculate delivery date (7 days from now)
+    const orderDate = new Date();
+    const deliveryDate = new Date(orderDate);
+    deliveryDate.setDate(orderDate.getDate() + 7);
+
+    // Iterate over each product and handle ID and quantity separately
+    this.products.forEach(product => {
+      const productId = product.id; // Get the individual product ID
+      const quantity = product.quantity || 1;  // Get the quantity (default to 1 if undefined)
+
+      // Create order data for each product individually
+      const orderData = {
+        userId: this.userId ?? 1, // Use localStorage value or fallback to 1
+        productId: productId,  // Individual product ID
+        quantity: quantity,  // Individual quantity
+        addressId: addressId,  // Selected address ID
+        amount: this.totalAmount,  // Total amount (could be modified based on the product)
+        deliveryDate: deliveryDate.toISOString().split('T')[0],  // Format delivery date to 'YYYY-MM-DD'
       };
-      const rzp = new (window as any).Razorpay(options);
-      rzp.open();
-    }, error => {
-      console.error('Error in creating order:', error);
+
+      // Call the paymentService to create a Razorpay order for each product
+      this.orderService.createOrder(orderData).subscribe(orderResponse => {
+        // Set up Razorpay options
+        const options: any = {
+          key: 'rzp_test_KicENYodOfmrEn',  // Razorpay Key ID
+          amount: (this.totalAmount / this.products.length) * 100,  // Razorpay expects the amount in paise, divide by products length for simplicity
+          currency: 'INR',
+          name: 'Your Company Name',  // Set your company name
+          description: `Payment for Product ID: ${productId}`,  // Description for the Razorpay checkout
+          order_id: orderResponse.id,  // Use the order ID from your backend response (Razorpay order ID)
+          handler: (response: any) => {
+            // Handle the success of the payment
+            console.log('Payment success for Product ID:', productId, response);
+          },
+          prefill: {
+            name: userName,  // User's name from selected address
+            email: userEmail,  // User's email from local storage or fallback
+            contact: userPhone  // User's phone from selected address
+          },
+          notes: {
+            address: `${this.selectedAddress?.addressLine1 || ''}, ${this.selectedAddress?.addressLine2 || ''}`  // Safe access for address fields
+          },
+          theme: {
+            color: '#3399cc'  // Customize the checkout page color
+          }
+        };
+
+        // Initialize Razorpay and open the payment interface for each product
+        const rzp = new (window as any).Razorpay(options);
+        rzp.open();
+      }, error => {
+        console.error(`Error in creating Razorpay order for Product ID: ${productId}`, error);
+      });
     });
+  } else {
+    console.error('Selected address or products are missing.');
   }
+}
+
+
+
+   verifyPayment(paymentDetails: any) {
+    this.orderService.verifyPayment(paymentDetails).subscribe(
+      (response) => {
+        console.log('Payment Verified', response);
+      },
+      (error) => {
+        console.error('Error verifying payment', error);
+      }
+    );
+  }
+
+
+
 }

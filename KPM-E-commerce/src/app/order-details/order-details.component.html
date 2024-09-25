@@ -1,0 +1,13 @@
+<div *ngIf="order">
+    <h2>Order Details</h2>
+    <p>Order ID: {{ order.orderId }}</p>
+    <p>Amount: {{ order.amount }}</p>
+    <p>Status: {{ order.orderStatus }}</p>
+    <p>Quantity: {{ order.quantity }}</p>
+    <p>Order Date: {{ order.orderDate }}</p>
+    <p>Delivery Date: {{ order.deliveryDate }}</p>
+</div>
+
+<div *ngIf="!order">
+    <p>Loading order details...</p>
+</div>

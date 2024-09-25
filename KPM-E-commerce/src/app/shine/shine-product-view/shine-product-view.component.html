@@ -112,12 +112,16 @@
             </div>
               <div class="d-flex">
                 <div class="product-buy-add">
-                  <button
-                    routerLink="/cart"
-                    class="btn btn-cart mt-0"
-                    (click)="addToCart(product)"
-                  >
-                    Add to Cart
+                  
+                  <button class="card-btn" routerLink="/cart"
+                    class="btn btn-cart mt-0" (click)="addToCart(product)" [disabled]="isProductAdding[product.id]">
+                    <!-- Show "Adding..." if the product is being added -->
+                    <ng-container *ngIf="isProductAdding[product.id]">Adding...</ng-container>
+                  
+                    <!-- Show "Added Successfully" if the product was added, otherwise show "Add to Cart" -->
+                    <ng-container *ngIf="!isProductAdding[product.id]">
+                      {{ isProductAdded[product.id] ? 'Added Successfully' : 'Add to Cart' }}
+                    </ng-container>
                   </button>
                   <button
                     class="btn btn-success mt-0"

@@ -30,7 +30,7 @@
     <ng-container *ngIf="isLoggedIn(); else loginLink">
       <!-- Show Profile Button if User is Logged In -->
       <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#userProfileModal"  *ngIf="user">
-        <img class="userphoto" height="30px" width="30px" [src]="'data:image/png;base64,'+user.avatarUrl" alt="Login">
+        <img class="userphoto" height="30px" width="30px" [src]="'data:image/png;base64,'+userProfile.avatarUrl" alt="Login">
       </button>
     </ng-container>
     <!-- Login Link if User is Not Logged In -->

@@ -1,5 +1,5 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,9 +12,6 @@ export class PaymentService {
 
   // Create order
 
-   createOrder(amount: number): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { amount });
-  }
 
   // Verify payment
   verifyPayment(

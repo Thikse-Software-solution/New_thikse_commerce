@@ -1,9 +1,8 @@
 // src/app/reports/reports.component.ts
 
-import { Component, OnInit } from '@angular/core';
-import { ReportsService } from '../../services/reports.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-reports',

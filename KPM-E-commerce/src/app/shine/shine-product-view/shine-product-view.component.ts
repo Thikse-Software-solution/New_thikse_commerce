@@ -25,6 +25,8 @@ export class ShineProductViewComponent implements OnInit, OnDestroy {
   reviews: string[] = [];
   private isBrowser: boolean;
   subcategoryProducts: any[] = [];
+  isProductAdding: { [key: number]: boolean } = {}; // Tracks "Adding..." state for each product
+  isProductAdded: { [key: number]: boolean } = {};
 
 
   colors: string[] = ['#000', '#EDEDED', '#D5D6D8', '#EFE0DE', '#AB8ED1', '#F04D44'];
@@ -316,6 +318,11 @@ export class ShineProductViewComponent implements OnInit, OnDestroy {
     this.cartService.addOrUpdateCartItem(parsedUserId, product.id, product.quantity)
       .subscribe({
         next: (response) => {
+          this.isProductAdding[product.id] = false; // Hide "Adding..."
+            this.isProductAdded[product.id] = true;
+            setTimeout(() => {
+              this.isProductAdded[product.id] = false;
+            }, 3000); // Reset after 3 seconds
           console.log('Product added to cart successfully:', response);
         },
         error: (error) => {

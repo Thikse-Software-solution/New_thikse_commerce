@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { catchError } from 'rxjs/operators';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProductService, Product } from '../services/product.service';
-import { PLATFORM_ID } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-special',

@@ -1,7 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Customer } from '../services/customer';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +8,7 @@ import { Customer } from '../services/customer';
 export class CustomerService {
   private apiUrl = 'http://192.168.1.20:8080/api/admin/customers';
 
- 
+
   constructor(private http: HttpClient) {}
 
   addCustomer(formData: FormData): Observable<any> {

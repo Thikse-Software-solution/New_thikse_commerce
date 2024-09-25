@@ -1,48 +1,43 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject, of, catchError } from 'rxjs';
-import { Order } from '../services/order.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Order } from './order.model'; // Assuming you have an Order interface or model
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class OrderService {
   private baseUrl = 'http://192.168.1.20:8080/api/orders'; // Update with your API URL
 
   constructor(private http: HttpClient) {}
 
-  private ordersSubject = new BehaviorSubject<Order[]>([]);
-  orders$ = this.ordersSubject.asObservable();
-
-
-
   // Place an order
-  placeOrder(orderDTO: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/place`, orderDTO);
+  createOrder(order: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/place`, order);
   }
 
   // Verify payment
   verifyPayment(paymentDetails: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/verifyPayment`, paymentDetails);
+    return this.http.post(`${this.apiUrl}/verifyPayment`, paymentDetails);
   }
 
-  // Get orders by user
+  // Get all orders by user ID
   getOrdersByUser(userId: number): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.baseUrl}/user/${userId}`);
+    return this.http.get<Order[]>(`${this.apiUrl}/user/${userId}`);
   }
 
   // Get order by ID
   getOrderById(orderId: number): Observable<Order> {
-    return this.http.get<Order>(`${this.baseUrl}/${orderId}`);
+    return this.http.get<Order>(`${this.apiUrl}/${orderId}`);
   }
 
   // Update order status
   updateOrderStatus(orderId: number, status: string, userId: number): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${orderId}/status`, { status }, { params: { userId: userId.toString() } });
+    return this.http.put(`${this.apiUrl}/${orderId}/status`, { status, userId });
   }
 
   // Get all orders
   getAllOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(`${this.baseUrl}`);
+    return this.http.get<Order[]>(this.apiUrl);
   }
 }
