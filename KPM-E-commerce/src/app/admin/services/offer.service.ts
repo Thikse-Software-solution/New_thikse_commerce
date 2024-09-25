@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class OfferService {
-  private baseUrl = 'http://192.168.1.6:8080/api/offers'; // Adjust URL
+  private baseUrl = 'http://192.168.1.20:8080/api/offers'; // Adjust URL
 
   constructor(private http: HttpClient) {}
 

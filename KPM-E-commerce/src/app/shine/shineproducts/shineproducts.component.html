@@ -38,6 +38,16 @@
   </div>
 </div>
 <ng-template #noProducts>
-  <p>No products available.</p>
+  <div class="spinner-load" *ngIf="loading">
+    <div class="lds-dual-ring"></div>
+  </div>
+  <div *ngIf="!loading && products.length === 0">
+    Coming Soon: Stay Tuned!
+  </div>
 </ng-template>
+<!-- <ng-template #noProducts>
+  <div class="spinner-load">
+    <div class="lds-dual-ring"></div>
+  </div>
+</ng-template> -->
 </div>

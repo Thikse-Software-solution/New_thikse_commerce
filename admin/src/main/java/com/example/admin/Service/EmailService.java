@@ -49,7 +49,7 @@ public class EmailService {
         long timestamp = new Date().getTime();
         String encodedTimestamp = URLEncoder.encode(String.valueOf(timestamp), StandardCharsets.UTF_8);
 
-        String resetLink = "http://192.168.1.6:4200/E-coomerce/resetpassword?email=" +
+        String resetLink = "http://192.168.1.20:4200/E-coomerce/resetpassword?email=" +
                 URLEncoder.encode(to, StandardCharsets.UTF_8) +
                 "&timestamp=" + encodedTimestamp;
 

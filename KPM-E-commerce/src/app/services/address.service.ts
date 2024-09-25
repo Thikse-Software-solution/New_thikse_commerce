@@ -7,7 +7,7 @@ import { Address } from './address.model'; // Adjust the import path according t
   providedIn: 'root',
 })
 export class AddressService {
-  private apiUrl = 'http://192.168.1.6:8080/api/addresses'; // Update with your Spring Boot API URL
+  private apiUrl = 'http://192.168.1.20:8080/api/addresses'; // Update with your Spring Boot API URL
 
   // BehaviorSubject to manage the selected address
   private selectedAddressSubject = new BehaviorSubject<Address | null>(null);

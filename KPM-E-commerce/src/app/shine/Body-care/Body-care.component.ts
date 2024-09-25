@@ -11,8 +11,9 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 })
 export class BodyCareComponent implements OnInit {
 products: any[] = [];
-  category: string = 'body care';
-  filteredProducts: any[] = [];
+loading = true;  // Controls the spinner visibility
+category: string = 'body care';
+filteredProducts: any[] = [];
   
    isProductAdding: { [key: number]: boolean } = {}; // Tracks "Adding..." state for each product
   isProductAdded: { [key: number]: boolean } = {}; // Tracks "Added Successfully" state for each product
@@ -32,6 +33,10 @@ products: any[] = [];
     this.sharedService.currentSearchQuery.subscribe(query => {
       this.applyFilters(query);
     });
+     // Simulate a 3-second delay for loading the spinner
+     setTimeout(() => {
+      this.loading = false;
+    }, 3000);
   }
 
   applyFilters(query: string) {

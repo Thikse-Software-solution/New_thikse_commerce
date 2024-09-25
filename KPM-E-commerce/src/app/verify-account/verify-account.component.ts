@@ -29,7 +29,7 @@ export class VerifyAccountComponent implements OnInit {
   }
 
   verifyAccount(token: string): void {
-    this.http.get(`http://192.168.1.6:8080/api/users/verify?token=${token}`)
+    this.http.get(`http://192.168.1.20:8080/api/users/verify?token=${token}`)
       .subscribe({
         next: (response: any) => {
           this.verificationMessage = 'Account successfully verified. Redirecting to login...';

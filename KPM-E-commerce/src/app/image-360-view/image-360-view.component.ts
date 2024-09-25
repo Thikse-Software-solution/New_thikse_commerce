@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-image-360-view',
   templateUrl: './image-360-view.component.html',
-  styleUrls: ['./image-360-view.component.css']
+  styleUrls: ['./image-360-view.component.scss']
 })
 export class Image360ViewComponent {
   images: string[] = [

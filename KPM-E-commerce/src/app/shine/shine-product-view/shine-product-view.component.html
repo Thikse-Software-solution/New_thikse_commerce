@@ -224,7 +224,7 @@
       [style.transform]="'translateX(' + -currentIndex * cardWidth + 'px)'"
     >
       <div *ngFor="let card of duplicatedCards" class="carousel-card">
-        <img [src]="'data:image/png;base64' + card.image" alt="Card Image" />
+        <img [src]= "'data:image/png;base64' + card.image" alt="Card Image" />
         <h3>{{ card.title }}</h3>
         <p>{{ card.text }}</p>
       </div>

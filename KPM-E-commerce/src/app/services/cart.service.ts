@@ -59,7 +59,7 @@ export class CartService {
   private cartItemCountSource = new BehaviorSubject<number>(0);
   cartItemCount$ = this.cartItemCountSource.asObservable();
 
-  private apiUrl = 'http://192.168.1.6:8080/api/cart'; // Base URL for cart API, replace with your actual backend URL
+  private apiUrl = 'http://192.168.1.20:8080/api/cart'; // Base URL for cart API, replace with your actual backend URL
 
   constructor(private http: HttpClient) {}
 

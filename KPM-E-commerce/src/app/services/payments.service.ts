@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class PaymentService {
-  private apiUrl = 'http://192.168.1.6:8080/api/orders/place'; // Adjust to your backend URL
+  private apiUrl = 'http://192.168.1.20:8080/api/orders/place'; // Adjust to your backend URL
 
   constructor(private http: HttpClient) {}
 

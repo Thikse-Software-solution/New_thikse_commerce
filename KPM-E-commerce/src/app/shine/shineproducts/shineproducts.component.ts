@@ -12,6 +12,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class ShineproductsComponent implements OnInit {
 
   products: any[] = [];  // Array to hold all products
+  loading = true;  // Controls the spinner visibility
   filteredProducts: any[] = [];  // Array to hold the filtered products
   userId: number = 0; // Define a variable to store userId
   // State variable to track button text changes for added products
@@ -34,6 +35,10 @@ export class ShineproductsComponent implements OnInit {
     this.sharedService.currentSearchQuery.subscribe(query => {
       this.applyFilters(query);
     });
+     // Simulate a 3-second delay for loading the spinner
+     setTimeout(() => {
+      this.loading = false;
+    }, 3000);
   }
 
   // Method to fetch all products

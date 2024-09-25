@@ -11,11 +11,12 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 })
 export class FaceCareComponent implements OnInit {
 products: any[] = [];
-  category: string = 'face care';
-  filteredProducts: any[] = [];
-   // State variable to track button text changes for added products
-  isProductAdding: { [key: number]: boolean } = {}; // Tracks "Adding..." state for each product
-  isProductAdded: { [key: number]: boolean } = {}; // Tracks "Added Successfully" state for each product
+loading = true;  // Controls the spinner visibility
+category: string = 'face care';
+filteredProducts: any[] = [];
+  // State variable to track button text changes for added products
+isProductAdding: { [key: number]: boolean } = {}; // Tracks "Adding..." state for each product
+isProductAdded: { [key: number]: boolean } = {}; // Tracks "Added Successfully" state for each product
 
   constructor(
     private productService: ShineProductService,
@@ -32,6 +33,10 @@ products: any[] = [];
     this.sharedService.currentSearchQuery.subscribe(query => {
       this.applyFilters(query);
     });
+     // Simulate a 3-second delay for loading the spinner
+     setTimeout(() => {
+      this.loading = false;
+    }, 3000);
   }
 
    applyFilters(query: string) {

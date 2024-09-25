@@ -11,6 +11,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 })
 export class HairCareComponent implements OnInit {
 products: any[] = [];
+loading = true;  // Controls the spinner visibility
   category: string = 'hair care';
   filteredProducts: any[] = [];
    // State variable to track button text changes for added products
@@ -33,6 +34,10 @@ products: any[] = [];
     this.sharedService.currentSearchQuery.subscribe(query => {
       this.applyFilters(query);
     });
+     // Simulate a 3-second delay for loading the spinner
+     setTimeout(() => {
+      this.loading = false;
+    }, 3000);
   }
 
   applyFilters(query: string) {

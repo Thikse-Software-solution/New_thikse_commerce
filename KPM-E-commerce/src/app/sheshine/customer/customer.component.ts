@@ -18,7 +18,7 @@ export class CustomerComponent implements OnInit {
 
   fetchTestimonials() {
     this.http
-      .get<any[]>('http://192.168.1.6:8080/api/admin/customers/get')
+      .get<any[]>('http://192.168.1.20:8080/api/admin/customers/get')
       .subscribe(
         (data) => {
           this.testimonials = data;

@@ -14,7 +14,7 @@ import { User } from './user-profile.model';
 })
 export class AuthService {
   private isAuthenticated: boolean = false;
-  private apiUrl = 'http://192.168.1.6:8080/api/users';
+  private apiUrl = 'http://192.168.1.20:8080/api/users';
 
   constructor(private http: HttpClient) {}
 
