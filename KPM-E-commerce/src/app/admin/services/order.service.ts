@@ -35,7 +35,7 @@ getAllOrders(): Observable<any[]> {
 // Update order status with orderId, status, and userId
 updateOrderStatus(orderId: number, status: string, userId: number): Observable<any> {
   const url = `${this.apiUrl}/${orderId}/status`;
-
+  
   // Append userId as a request parameter
   let params = new HttpParams().set('userId', userId.toString());
 
