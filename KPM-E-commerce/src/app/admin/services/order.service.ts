@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class OrderService {
 
-  private baseUrl = 'http://192.168.1.10:8080/api/orders'; // Update with your API base URL
+  private apiUrl = 'http://192.168.1.10:8080/api/orders'; // Update with your API base URL
 
   constructor(private http: HttpClient) {}
 
