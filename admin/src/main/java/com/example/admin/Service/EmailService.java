@@ -2,10 +2,6 @@ package com.example.admin.Service;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +9,11 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class EmailService {
@@ -47,7 +48,7 @@ public class EmailService {
         long timestamp = new Date().getTime();
         String encodedTimestamp = URLEncoder.encode(String.valueOf(timestamp), StandardCharsets.UTF_8);
 
-        String resetLink = "http://192.168.1.20:4200/E-coomerce/resetpassword?email=" +
+        String resetLink = "http://192.168.1.8:4200/E-coomerce/resetpassword?email=" +
                 URLEncoder.encode(to, StandardCharsets.UTF_8) +
                 "&timestamp=" + encodedTimestamp;
 
@@ -135,7 +136,7 @@ public class EmailService {
     // Send OTP link method
     // Generate OTP link method
     public String generateOtpLink(String email, String otp) {
-        String baseUrl = "http://192.168.1.10:4200/verify-otp"; // Replace with your frontend URL or API endpoint
+        String baseUrl = "http://192.168.1.8:4200/verify-otp"; // Replace with your frontend URL or API endpoint
         return baseUrl + "?email=" + email + "&otp=" + otp;
     }
 

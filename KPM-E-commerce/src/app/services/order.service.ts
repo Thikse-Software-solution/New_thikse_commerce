@@ -7,7 +7,7 @@ import { Order } from './order.model'; // Assuming you have an Order interface o
   providedIn: 'root'
 })
 export class OrderService {
-  private baseUrl = 'http://192.168.1.20:8080/api/orders'; // Update with your API URL
+  private apiUrl = 'http://192.168.1.8:8080/api/orders'; // Update with your API URL
 
   constructor(private http: HttpClient) {}
 

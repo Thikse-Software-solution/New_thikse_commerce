@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CustomerService {
-  private apiUrl = 'http://192.168.1.20:8080/api/admin/customers';
+  private apiUrl = 'http://192.168.1.8:8080/api/admin/customers';
 
 
   constructor(private http: HttpClient) {}

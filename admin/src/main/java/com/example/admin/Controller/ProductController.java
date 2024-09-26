@@ -7,17 +7,18 @@ import com.example.admin.Entity.Product;
 import com.example.admin.Service.ProductService;
 import com.example.admin.Service.ReviewService;
 import jakarta.persistence.EntityNotFoundException;
-import java.io.IOException;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
-@CrossOrigin(origins = "http://192.168.1.20:4200")
+@CrossOrigin(origins = "http://192.168.1.8:4200")
 @RequestMapping("/api/products")
 public class ProductController {
 

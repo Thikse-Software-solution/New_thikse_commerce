@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ShippingDetailService {
-  private baseUrl = 'http://192.168.1.20:8080/api/analytics/shipping-details';
+  private baseUrl = 'http://192.168.1.8:8080/api/analytics/shipping-details';
 
   constructor(private http: HttpClient) {}
 

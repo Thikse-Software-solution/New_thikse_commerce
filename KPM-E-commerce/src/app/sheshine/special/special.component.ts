@@ -31,7 +31,7 @@ export class SpecialComponent {
   }
 
   fetchProducts(): Observable<any[]> {
-    return this.http.get<any[]>('http://192.168.1.20:8080/api/products/json');
+    return this.http.get<any[]>('http://192.168.1.8:8080/api/products/json');
   }
 
   buyProduct(product: any): void {

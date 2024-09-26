@@ -27,7 +27,7 @@ export interface Product {
   providedIn: 'root',
 })
 export class ShineProductService {
-  private baseUrl: string = 'http://192.168.1.20:8080/api/products/json'; // Path to your JSON file
+  private baseUrl: string = 'http://192.168.1.8:8080/api/products/json'; // Path to your JSON file
 
   constructor(private http: HttpClient) {}
 

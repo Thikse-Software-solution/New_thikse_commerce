@@ -9,9 +9,6 @@ import com.example.admin.request.LoginRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +18,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.*;
+
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "http://192.168.1.20:4200") // Cross-origin for Angular app
+@CrossOrigin(origins = "http://192.168.1.8:4200") // Cross-origin for Angular app
 public class AuthController {
     private static final Logger log = LoggerFactory.getLogger(AuthController.class);
 
@@ -66,7 +67,7 @@ public class AuthController {
         userRepository.save(user);
 
         // Create verification link
-        String verificationLink = "http://192.168.1.20:4200/E-coomerce/verify?token=" + user.getVerificationToken();
+        String verificationLink = "http://192.168.1.8:4200/E-coomerce/verify?token=" + user.getVerificationToken();
 
         // Send the verification email with the link
         String subject = "Account Verification";
@@ -146,7 +147,7 @@ public class AuthController {
                 return ResponseEntity.ok(user);
             } else {
                 // If not verified, send verification email and return a forbidden response
-                String verificationLink = "http://192.168.1.20:4200/E-coomerce/verify?token=" + user.getVerificationToken();
+                String verificationLink = "http://192.168.1.8:4200/E-coomerce/verify?token=" + user.getVerificationToken();
                 String subject = "Account Verification Reminder";
                 String message = "You need to verify your account before logging in. Please verify your account by clicking the following link: " + verificationLink;
                 emailService.sendEmail(user.getEmail(), subject, message);
