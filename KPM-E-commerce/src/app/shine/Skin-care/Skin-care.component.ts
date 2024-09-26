@@ -12,6 +12,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class SkinCareComponent implements OnInit {
 
   products: any[] = [];
+  loading = true;  // Controls the spinner visibility
   category: string = 'skin care';
   filteredProducts: any[] = [];
     isProductAdding: { [key: number]: boolean } = {}; // Tracks "Adding..." state for each product
@@ -27,12 +28,14 @@ export class SkinCareComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts();
-
-
-         // Subscribe to search query changes
+    // Subscribe to search query changes
     this.sharedService.currentSearchQuery.subscribe(query => {
       this.applyFilters(query);
     });
+     // Simulate a 3-second delay for loading the spinner
+     setTimeout(() => {
+      this.loading = false;
+    }, 3000);
   }
 
   getProducts(): void {

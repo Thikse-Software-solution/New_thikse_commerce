@@ -26,7 +26,7 @@
         </div>
         <span>or use your email for registration</span>
 
-        
+
         <input type="text" placeholder="Name" formControlName="name">
         <input type="email" placeholder="Email" formControlName="email">
         <input type="password" placeholder="Password" formControlName="password">
@@ -43,29 +43,22 @@
         <h4>Create Account</h4>
         <span>or use your email for registration</span>
 
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" formControlName="name" />
-        </div>
+<div class="w-100">
+    <label for="name">Name:</label>
+    <input type="text" id="name" formControlName="name" />
+</div>
 
-        <div>
-            <label for="email">Email:</label>
-            <input type="email" id="email" formControlName="email" />
-        </div>
+<div class="w-100">
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email" />
+</div>
 
-        <div>
-            <label for="password">Password:</label>
-            <!-- Password Input with Toggle Icon -->
-            <div class="password-wrapper">
-                <input type="password" id="password" [type]="showPassword ? 'text' : 'password'"
-                    formControlName="password" />
-                <i class="toggle-icon" (click)="togglePasswordVisibility()">
-                    <!-- Show/Hide Password Icon -->
-                    <span *ngIf="!showPassword">👁️</span> <!-- Eye icon for "Show" -->
-                    <span *ngIf="showPassword">🙈</span> <!-- Eye slash icon for "Hide" -->
-                </i>
-            </div>
-        </div>
+<div class="w-100">
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password" />
+</div>
+<div *ngIf="errorMessage">{{ errorMessage }}</div>
+<div *ngIf="successMessage">{{ successMessage }}</div>
 
         <div *ngIf="errorMessage">{{ errorMessage }}</div>
         <div *ngIf="successMessage">{{ successMessage }}</div>

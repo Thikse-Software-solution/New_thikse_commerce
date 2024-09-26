@@ -13,6 +13,7 @@ export class PickProductComponent implements OnInit {
   products: any[] = [];  // Array to hold all products
   filteredProducts: any[] = [];  // Array to hold the filtered products
   searchQuery: string = '';  // Search query for filtering
+  loading = true;  // Controls the spinner visibility
     // State variable to track button text changes for added products
   isProductAdding: { [key: number]: boolean } = {}; // Tracks "Adding..." state for each product
   isProductAdded: { [key: number]: boolean } = {}; // Tracks "Added Successfully" 
@@ -28,7 +29,12 @@ export class PickProductComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit() {
+    
     this.getAllProducts();  // Fetch all products on component initialization
+     // Simulate a 3-second delay for loading the spinner
+     setTimeout(() => {
+      this.loading = false;
+    }, 3000);
   }
 
   // Method to fetch all products

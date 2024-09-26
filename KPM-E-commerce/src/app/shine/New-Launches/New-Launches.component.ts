@@ -13,6 +13,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class NewLaunchesComponent implements OnInit {
 
  products: any[] = [];
+ loading = true;  // Controls the spinner visibility
   category: string = 'new launches';
   filteredProducts: any[] = [];
   // State variable to track button text changes for added products
@@ -34,6 +35,10 @@ export class NewLaunchesComponent implements OnInit {
      this.sharedService.currentSearchQuery.subscribe(query => {
       this.applyFilters(query);
     });
+     // Simulate a 3-second delay for loading the spinner
+     setTimeout(() => {
+      this.loading = false;
+    }, 3000);
   }
 
   getProducts(): void {

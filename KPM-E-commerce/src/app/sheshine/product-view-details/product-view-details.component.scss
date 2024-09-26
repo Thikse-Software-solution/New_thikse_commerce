@@ -294,3 +294,16 @@ button {
     margin-top: 10px;
   }
 }
+
+// Loading-container
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50vh;
+  text-align: center;
+
+  .spinner-border {
+    margin-left: 10px;
+  }
+}

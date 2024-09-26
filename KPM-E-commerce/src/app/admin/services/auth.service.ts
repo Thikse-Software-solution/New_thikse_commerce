@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-const BASIC_URL = 'http://192.168.1.10:8080/api';
+const BASIC_URL = 'http://192.168.1.8:8080/api';
 
 @Injectable({
   providedIn: 'root',
