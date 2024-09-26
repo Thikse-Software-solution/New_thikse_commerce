@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class OutOfStockProductService {
   private baseUrl =
-    'http://localhost:8080/api/analytics/out-of-stock-products';
+    'http://192.168.1.8:8080/api/analytics/out-of-stock-products';
 
   constructor(private http: HttpClient) {}
 

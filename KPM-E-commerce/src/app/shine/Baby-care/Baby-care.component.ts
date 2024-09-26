@@ -12,6 +12,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 export class BabyCareComponent implements OnInit {
   products: any[] = [];
   category: string = 'Baby Care';
+  loading = true;  // Controls the spinner visibility
   filteredProducts: any[] = [];
     // State variable to track button text changes for added products
   isProductAdding: { [key: number]: boolean } = {}; // Tracks "Adding..." state for each product
@@ -28,6 +29,10 @@ export class BabyCareComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts();
+       // Simulate a 3-second delay for loading the spinner
+    setTimeout(() => {
+      this.loading = false;
+    }, 3000);
 
          // Subscribe to search query changes
     this.sharedService.currentSearchQuery.subscribe(query => {

@@ -19,6 +19,7 @@ export class ProductViewDetailsComponent implements OnInit {
   productDetails: any;
   reviewText: string = '';
   reviews: string[] = [];
+  isLoading: boolean = true; // Loading state
    
   colors: string[] = ['#000', '#EDEDED', '#D5D6D8', '#EFE0DE', '#AB8ED1', '#F04D44'];
 
@@ -43,13 +44,16 @@ export class ProductViewDetailsComponent implements OnInit {
         console.log('Product fetched:', this.product);
 
         // Ensure the quantity is initialized to 1 if not already set
-        if (this.product && (typeof this.product.quantity !== 'number' || isNaN(this.product.quantity))) {
+        if (!this.product.quantity) {
           this.product.quantity = 1;
         }
-      },
-      error: (err) => {
-        console.error('Error fetching product:', err);
-      }
+         // Stop loading once data is fetched
+         this.isLoading = false;
+        },
+        error: (err) => {
+          console.error('Error fetching product:', err);
+          this.isLoading = false; // Stop loading even on error
+        }
     });
   }
 

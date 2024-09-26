@@ -11,6 +11,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 })
 export class ProductsComponent implements OnInit {
   products: any[] = [];
+  loading = true;  // Controls the spinner visibility
   filteredProducts: any[] = [];
   category: string | null = null;
   searchQuery: string = '';
@@ -36,11 +37,14 @@ export class ProductsComponent implements OnInit {
       console.log('Received category:', this.category); // Debug log
       this.applyFilters();
     });
-
     this.sharedService.currentSearchQuery.subscribe(query => {
       this.searchQuery = query;
       this.applyFilters();
     });
+     // Simulate a 3-second delay for loading the spinner
+     setTimeout(() => {
+      this.loading = false;
+    }, 3000);
   }
 
   loadProducts(): void {
