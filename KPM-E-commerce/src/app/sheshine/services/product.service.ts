@@ -39,8 +39,8 @@ export class ProductService {
   public product$: Observable<Product | null> =
     this.productSubject.asObservable();
 
-  private productsUrl = 'http://192.168.1.10:8080/api/products/json';
-  private shineProductsUrl = 'http://192.168.1.10:8080/api/products/json';
+  private productsUrl = 'http://localhost:8080/api/products/json';
+  private shineProductsUrl = 'http://localhost:8080/api/products/json';
 
   constructor(private http: HttpClient) {
     this.loadProduct();

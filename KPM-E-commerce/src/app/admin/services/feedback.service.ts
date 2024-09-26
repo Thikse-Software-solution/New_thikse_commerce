@@ -7,7 +7,7 @@ import { Feedback } from '../services/customer'; // Adjust path as necessary
   providedIn: 'root',
 })
 export class FeedbackService {
-  private baseUrl = 'http://192.168.1.10:8080/api/feedbacks'; // Adjust URL
+  private baseUrl = 'http://localhost:8080/api/feedbacks'; // Adjust URL
 
   constructor(private http: HttpClient) {}
 

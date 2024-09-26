@@ -13,7 +13,7 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class AuthService {
   private isAuthenticated: boolean = false;
-  private apiUrl = 'http://192.168.1.10:8080/api/users';
+  private apiUrl = 'http://localhost:8080/api/users';
 
   constructor(private http: HttpClient) {}
 

@@ -8,7 +8,7 @@ import { Review } from './review.model';
 })
 export class ReviewService {
 
-  private apiUrl = 'http://192.168.1.10:8080/api/reviews'; // Your API base URL
+  private apiUrl = 'http://localhost:8080/api/reviews'; // Your API base URL
 
   constructor(private http: HttpClient) {}
 

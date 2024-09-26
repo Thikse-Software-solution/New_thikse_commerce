@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class OrderService {
 
-  private baseUrl = 'http://192.168.1.10:8080/api/orders'; // Update with your API base URL
+  private baseUrl = 'http://localhost:8080/api/orders'; // Update with your API base URL
 
   constructor(private http: HttpClient) {}
 
@@ -30,12 +30,12 @@ export class OrderService {
 //   }
 // }
 getAllOrders(): Observable<any[]> {
-  return this.http.get<any[]>(this.apiUrl);
+  return this.http.get<any[]>(this.baseUrl);
 }
 
 // Update order status with orderId, status, and userId
 updateOrderStatus(orderId: number, status: string, userId: number): Observable<any> {
-  const url = `${this.apiUrl}/${orderId}/status`;
+  const url = `${this.baseUrl}/${orderId}/status`;
   
   // Append userId as a request parameter
   let params = new HttpParams().set('userId', userId.toString());

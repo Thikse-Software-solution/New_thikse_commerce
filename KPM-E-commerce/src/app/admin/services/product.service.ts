@@ -7,7 +7,7 @@ import { Product } from './product.model';
   providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = 'http://192.168.1.10:8080/api/products'; // Adjust base URL if necessary
+  private apiUrl = 'http://localhost:8080/api/products'; // Adjust base URL if necessary
 
   constructor(private http: HttpClient) {}
   addProduct(product: FormData): Observable<Product> {
